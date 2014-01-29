@@ -3,6 +3,7 @@
 ## by the PayPal Accessibility Team
 See the [Authors](#authors) section below for more information.
 
+
 ## What is it?
 This plugin adds accessibility mark-up to the [default components of Bootstrap 3](http://getbootstrap.com/javascript/) to make them accessible for keyboard and screen reader users. Do not worry, the plugin does not affect the performance or the visual layout of your website. Let the magic remain magic!
 
