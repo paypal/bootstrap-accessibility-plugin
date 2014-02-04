@@ -1,7 +1,7 @@
 /* ========================================================================
 * Extends Bootstrap v3.0.0 
 
-* Copyright (c) <2013> eBay Software Foundation
+* Copyright (c) <2014> eBay Software Foundation
 
 * All rights reserved.
 
