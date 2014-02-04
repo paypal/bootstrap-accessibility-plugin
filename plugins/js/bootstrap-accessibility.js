@@ -257,6 +257,8 @@
               $curPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1' })
             }            
         })      
+      }else{
+        collToggle.apply(this, arguments)
       }
     }
 
