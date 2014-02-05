@@ -68,6 +68,16 @@
        modalhide.apply(this, arguments)
        modalOpener.focus()
     }
+    
+    var modalshow =   $.fn.modal.Constructor.prototype.show
+    $.fn.modal.Constructor.prototype.show = function(){
+      var $title = this.$element.find('.modal-title');
+      var titleID = $title.attr('id') || 'ui-modal-title'+ Math.floor((Math.random()*100)+1)
+       $title.attr('id', titleID);
+
+       this.$element.attr('aria-labelledby', titleID);
+       modalshow.apply(this, arguments)
+    }
 
   // DROPDOWN Extension
   // ===============================
