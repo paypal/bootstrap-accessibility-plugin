@@ -116,8 +116,9 @@
 
       .on('focusout.dropdown.data-api', '.dropdown-menu', function(e){
         var $this = $(this)
+                    , that = this
         setTimeout(function() {
-         if(!$(document.activeElement).is($this.find("a"))){
+         if(!$.contains(that, document.activeElement)){
           $this.parent().removeClass('open')
           $this.parent().find('[data-toggle=dropdown]').attr('aria-expanded','false')
          }
