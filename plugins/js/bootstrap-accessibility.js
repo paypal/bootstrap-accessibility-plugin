@@ -22,7 +22,8 @@
   // ===============================
 
     $('.alert').attr('role', 'alert')
-
+    $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
+    
   // TOOLTIP Extension
   // ===============================
 
@@ -93,7 +94,6 @@
     })
 
     //Adding Space Key Behaviour, opens on spacebar
-    // var drpKeyDown = $.fn.dropdown.Constructor.prototype.keydown
     $.fn.dropdown.Constructor.prototype.keydown = function (e) {
       var $tar 
         , $par
@@ -106,7 +106,6 @@
         e.preventDefault() && e.stopPropagation()
         firstItem = $('[role=menuitem]:visible', $par)[0]
         try{ firstItem.focus()} catch(ex) {}
-      // drpKeyDown.apply(this, arguments)
     }
 
     $(document)
