@@ -43,6 +43,19 @@ a:focus {
   outline: dotted 1px black;
 }
 
-.alert{
-  color: black;
-}  
+.alert-succes {
+    color: #2d4821;
+}
+
+.alert-info {
+    color: #214c62;
+}
+
+.alert-warning {
+    color: #6c4a00;
+    background-color: #f9f1c6;
+}
+
+.alert-danger {
+    color: #7c3130;
+}
