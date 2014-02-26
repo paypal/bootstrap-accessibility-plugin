@@ -74,45 +74,40 @@
   // ===============================
 
     var toggle   = '[data-toggle=dropdown]'
-      , $tar 
       , $par
       , firstItem
+      , focusDelay = 200
 
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
-    $(toggle).on('click',function(e){
-      $tar = $(e.target)
-      $par = $tar.parent()
+
+    $(toggle).parent().on('shown.bs.dropdown',function(e){
+      $par = $(this)
+      var $toggle = $par.find(toggle)
+      $toggle.attr('aria-expanded','true')
+
       setTimeout(function(){
-        if($par.hasClass('open')){
-            $(toggle).attr('aria-expanded','false')
-            $tar.attr('aria-expanded','true')
             firstItem = $('[role=menuitem]:visible', $par)[0]
             try{ firstItem.focus()} catch(ex) {}
-        }
-      },200)
-      
+      }, focusDelay)
+    })
+
+    $(toggle).parent().on('hidden.bs.dropdown',function(e){
+      $par = $(this)
+      var $toggle = $par.find(toggle)
+      $toggle.attr('aria-expanded','false')
     })
 
     //Adding Space Key Behaviour, opens on spacebar
     $.fn.dropdown.Constructor.prototype.keydown = function (e) {
-      var $tar 
-        , $par
+      var  $par
         , firstItem
       if (!/(32)/.test(e.keyCode)) return
-        $tar = $(e.target)
-        $par = $tar.parent()        
-        $(this).parent().addClass('open')
-        $tar.attr('aria-expanded','true')
+        $par = $(this).parent()        
+        $(this).trigger ("click")
         e.preventDefault() && e.stopPropagation()
-        firstItem = $('[role=menuitem]:visible', $par)[0]
-        try{ firstItem.focus()} catch(ex) {}
     }
 
     $(document)
-      .on('click.bs.dropdown.data-api', function(){
-         $(toggle).attr('aria-expanded','false')
-      })
-
       .on('focusout.dropdown.data-api', '.dropdown-menu', function(e){
         var $this = $(this)
                     , that = this
