@@ -243,20 +243,22 @@
 
         collToggle.apply(this, arguments)
 
-        this.$element.one($.support.transition.end, function(){
+        if ($.support.transition) {
+          this.$element.one($.support.transition.end, function(){
 
-            prevTab.attr({ 'aria-selected':'false','aria-expanded':'false', 'tabIndex':'-1' })
-            $prevPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1'})
+              prevTab.attr({ 'aria-selected':'false','aria-expanded':'false', 'tabIndex':'-1' })
+              $prevPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1'})
 
-            curTab.attr({ 'aria-selected':'true','aria-expanded':'true', 'tabIndex':'0' })
+              curTab.attr({ 'aria-selected':'true','aria-expanded':'true', 'tabIndex':'0' })
 
-            if($curPanel.hasClass('in')){
-              $curPanel.attr({ 'aria-hidden' : 'false','tabIndex' : '0' })
-            }else{
-              curTab.attr({ 'aria-selected':'false','aria-expanded':'false'})
-              $curPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1' })
-            }            
-        })      
+              if($curPanel.hasClass('in')){
+                $curPanel.attr({ 'aria-hidden' : 'false','tabIndex' : '0' })
+              }else{
+                curTab.attr({ 'aria-selected':'false','aria-expanded':'false'})
+                $curPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1' })
+              }            
+          })
+        }      
       }else{
         collToggle.apply(this, arguments)
       }
