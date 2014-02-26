@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-accessibility-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin that provides accessibility features for Bootstrap3 components",
   "main": "Gruntfile.js",
   "homepage": "https://github.com/paypal/bootstrap-accessibility-plugin",
