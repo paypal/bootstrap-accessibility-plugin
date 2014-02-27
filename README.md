@@ -116,6 +116,10 @@ You may want to extend the plugin further or change some of the code. Here is ho
  - Srinivasu Chakravarthula, user interaction, testing || [@csrinivasu](https://twitter.com/csrinivasu)
  - Cathy O'Connor, design || [@cagocon](https://twitter.com/cagocon)
 
+## Other resources
+
+ -  [Bootstrap a11y theme](https://github.com/bassjobsen/bootstrap-a11y-theme), Make web accessibility (a11y) easier for Bootstrap Developers, a pure LESS / CSS solution
+
 ## Copyright and license
 
 Copyright 2014, eBay Software Foundation under [the BSD license](LICENSE.md).
