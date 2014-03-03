@@ -86,7 +86,7 @@
       $toggle.attr('aria-expanded','true')
 
       setTimeout(function(){
-            firstItem = $('[role=menuitem]:visible', $par)[0]
+            firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
             try{ firstItem.focus()} catch(ex) {}
       }, focusDelay)
     })
