@@ -33,7 +33,7 @@
     $.fn.tooltip.Constructor.prototype.show = function () {
         showTooltip.apply(this, arguments)
         var $tip = this.tip()
-            , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*100)+1)
+            , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*1000)+1)
         $tip.attr({'role':'tooltip','id' : tooltipID})
         this.$element.attr('aria-describedby', tooltipID)
     }
@@ -51,7 +51,7 @@
     $.fn.popover.Constructor.prototype.setContent = function(){
       showPopover.apply(this, arguments)
       var $tip = this.tip()
-        , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*100)+1)
+        , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*1000)+1)
       $tip.attr({'role':'alert','id' : tooltipID})
       this.$element.attr('aria-describedby', tooltipID)
       this.$element.focus()
@@ -77,7 +77,10 @@
       , $par
       , firstItem
       , focusDelay = 200
-
+      , menus = $(toggle).parent().find('ul').attr('role','menu')
+      , lis = menus.find('li').attr('role','presentation')
+      
+    lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
     $(toggle).parent().on('shown.bs.dropdown',function(e){
@@ -135,7 +138,7 @@
     $tabs.each(function( index ) {
       var tabpanel = $($(this).attr('href'))
         , tab = $(this)
-        , tabid = tab.attr('id') || 'ui-tab'+ Math.floor((Math.random()*100)+1)
+        , tabid = tab.attr('id') || 'ui-tab'+ Math.floor((Math.random()*1000)+1)
       
         tab.attr('id', tabid)
 
@@ -206,7 +209,7 @@
         , collpanel = $(colltab.attr('href'))
         , parent  = colltab.attr('data-parent')
         , collparent = parent && $(parent)        
-        , collid = colltab.attr('id') || 'ui-collapse'+ Math.floor((Math.random()*100)+1)
+        , collid = colltab.attr('id') || 'ui-collapse'+ Math.floor((Math.random()*1000)+1)
 
         $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
 		
