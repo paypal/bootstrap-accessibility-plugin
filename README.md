@@ -14,7 +14,16 @@ Read on to learn about all the enhancements introduced by this plugin.
 1. Download and include Bootstrap.js from [getbootstrap.com](http://getbootstrap.com/).
 2. Download and include the [bootstrap accessibility plugin js](plugins/js).
 3. Download and include the [bootstrap accessibility plugin css](plugins/css) to override css styles.
-4. Optional: Lazily load the JavaScript plugin after the page is loaded ([example](demo.html)).
+4. Optional: Lazily load the JavaScript plugin after the page is loaded ([example](demo.html)) .
+5. For basic implementation:
+```html
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-accessibility.css">
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-accessibility.min.js"></script>
+```   
 
 ## Which components become accessible?
 - Alert
@@ -103,8 +112,8 @@ You may want to extend the plugin further or change some of the code. Here is ho
   git submodule update
   ```
 
-  ## Feedback and Contributions
-  Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
+## Feedback and Contributions
+Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
 
 ## <a name="authors">Authors</a>
 
