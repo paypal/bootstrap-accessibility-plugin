@@ -18,6 +18,11 @@
 
 (function($) {
   "use strict";
+
+  var uniqueId = function(prefix) {
+      return (prefix || 'ui-id') + '-' + Math.floor((Math.random()*1000)+1)
+  }
+
   // Alert Extension
   // ===============================
 
@@ -33,7 +38,7 @@
     $.fn.tooltip.Constructor.prototype.show = function () {
         showTooltip.apply(this, arguments)
         var $tip = this.tip()
-            , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*1000)+1)
+            , tooltipID = $tip.attr('id') || uniqueId('ui-tooltip')
         $tip.attr({'role':'tooltip','id' : tooltipID})
         this.$element.attr('aria-describedby', tooltipID)
     }
@@ -51,7 +56,7 @@
     $.fn.popover.Constructor.prototype.setContent = function(){
       showPopover.apply(this, arguments)
       var $tip = this.tip()
-        , tooltipID = $tip.attr('id') || 'ui-tooltip'+ Math.floor((Math.random()*1000)+1)
+        , tooltipID = $tip.attr('id') || uniqueId('ui-tooltip')
       $tip.attr({'role':'alert','id' : tooltipID})
       this.$element.attr('aria-describedby', tooltipID)
       this.$element.focus()
@@ -62,7 +67,7 @@
     }
 
   //Modal Extension
-    $('.modal-content').attr( {'role' : 'document'})
+    $('.modal-dialog').attr( {'role' : 'document'})
     var modalhide =   $.fn.modal.Constructor.prototype.hide
     $.fn.modal.Constructor.prototype.hide = function(){      
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
@@ -138,7 +143,7 @@
     $tabs.each(function( index ) {
       var tabpanel = $($(this).attr('href'))
         , tab = $(this)
-        , tabid = tab.attr('id') || 'ui-tab'+ Math.floor((Math.random()*1000)+1)
+        , tabid = tab.attr('id') || uniqueId('ui-tab')
       
         tab.attr('id', tabid)
 
@@ -209,7 +214,7 @@
         , collpanel = $(colltab.attr('href'))
         , parent  = colltab.attr('data-parent')
         , collparent = parent && $(parent)        
-        , collid = colltab.attr('id') || 'ui-collapse'+ Math.floor((Math.random()*1000)+1)
+        , collid = colltab.attr('id') || uniqueId('ui-collapse')
 
         $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
 		
