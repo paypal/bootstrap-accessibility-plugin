@@ -44,6 +44,7 @@ Feel free to play with the [live demo](demo.html) of the components listed above
 1. Add role of Alert to Alert, Warning, and Success Bootstrap Messages.
 2. Increase the color contrast. The foreground to background color contrast ratio for the message was too low.
 3. Add instructions in message dialog, so that the developer using the alert knows to manage keyboard focus on alert dismissal.
+4. Close button now accessible to screen readers.
 
 ### Tooltip
 1. Add role of Tooltip to tooltip div.
@@ -59,6 +60,7 @@ Feel free to play with the [live demo](demo.html) of the components listed above
 1. Add role of Document to content div inside dialog, so that NVDA can force document mode and read contents inside Dialog.
 2. When the Modal is closed, return the focus to the element which opened the dialog.
 3. Change the focus outline of close button to visible.
+4. Close button now accessible to screen readers.
 
 ### Dropdown 
 1. Add aria-haspopup and and aria-expanded attributes to dropdown toggle link.
