@@ -7,14 +7,13 @@ See the [Authors](#authors) section below for more information.
 This plugin adds accessibility mark-up to the [default components of Bootstrap 3](http://getbootstrap.com/javascript/) to make them accessible for keyboard and screen reader users. Do not worry, the plugin does not affect the performance or the visual layout of your website. Let the magic remain magic!
 
 ## Why do I want it?
-If you use Bootstrap library (version 3.x) on your web site, your pages will now be much more usable and navigable for and by keyboard and screen reader users with no work on your part. Believe us, for this they will  will thank you!
-Read on to learn about all the enhancements introduced by this plugin.
+If you use Bootstrap library (version 3.x) on your website, your pages will now be much more usable and navigable for and by keyboard and screen reader users with no work on your part. Believe us, for this they will thank you! Read on to learn about all the enhancements introduced by this plugin.
 
-## How do I get it on my web site?
+## How do I get it on my website?
 1. Download and include Bootstrap.js from [getbootstrap.com](http://getbootstrap.com/).
 2. Download and include the [bootstrap accessibility plugin js](plugins/js).
 3. Download and include the [bootstrap accessibility plugin css](plugins/css) to override css styles.
-4. Optional: Lazily load the JavaScript plugin after the page is loaded ([example](demo.html)) .
+4. Optional: Lazily load the JavaScript plugin after the page is loaded ([example](demo.html)).
 5. For basic implementation:
 ```html
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -36,7 +35,7 @@ Read on to learn about all the enhancements introduced by this plugin.
 - Carousel
 
 ## Plugin Live Demo
-Feel free to play with the [live demo](demo.html) of the components listed above and the Bootstrap Accessibility Plugin in action. Seeing how "accessified" widgets work in this demo will help you verify whether the plugin is installed correctly on your web site.
+Feel free to play with the [live demo](demo.html) of the components listed above and the Bootstrap Accessibility Plugin in action. Seeing how "accessified" widgets work in this demo will help you verify whether the plugin is installed correctly on your website.
 
 ## Details
 
@@ -82,7 +81,7 @@ Feel free to play with the [live demo](demo.html) of the components listed above
 2. Add ARIA roles of tabPanel, tabIndex, aria-hidden, and aria-labelledBy for collapsible panel.
 3. Add role of tabList and aria-multiselectable for collapse container div.
 4. Dynamically flip tabIndex, aria-selected, and aria-expanded for tab when it is activated and add aria-hidden to hide the previously visible collapse tabpanel.
-5.  Add keydown event listener for the collapse component to work with keyboard.
+5. Add keydown event listener for the collapse component to work with keyboard.
 
 ### Carousel
 1. Prevent automatic cycling of the carousel.
@@ -117,14 +116,18 @@ You may want to extend the plugin further or change some of the code. Here is ho
 ## Feedback and Contributions
 Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
 
-## <a name="authors">Authors</a>
+## <a name="authors"></a>Authors
 
- - Prem Nawaz Khan, primary developer [https://github.com/mpnkhan](https://github.com/mpnkhan) || [@mpnkhan](https://twitter.com/mpnkhan)
- - Victor Tsaran, user interaction, testing, documentation [https://github.com/vick08](https://github.com/vick08) || [@vick08](https://twitter.com/vick08)
- - Dennis Lembree, developer, user interaction, testing [https://github.com/weboverhauls](https://github.com/weboverhauls) || [@dennisl](https://twitter.com/dennisl)
+ - Prem Nawaz Khan, primary developer || [https://github.com/mpnkhan](https://github.com/mpnkhan) || [@mpnkhan](https://twitter.com/mpnkhan)
+ - Victor Tsaran, user interaction, testing, documentation || [https://github.com/vick08](https://github.com/vick08) || [@vick08](https://twitter.com/vick08)
+ - Dennis Lembree, developer, user interaction, testing || [https://github.com/weboverhauls](https://github.com/weboverhauls) || [@dennisl](https://twitter.com/dennisl)
  - Srinivasu Chakravarthula, user interaction, testing || [@csrinivasu](https://twitter.com/csrinivasu)
  - Cathy O'Connor, design || [@cagocon](https://twitter.com/cagocon)
 
-## Copyright and license
+## Related Resources
+
+ -  [Bootstrap a11y theme](https://github.com/bassjobsen/bootstrap-a11y-theme) - makes web accessibility easier for Bootstrap developers, a pure LESS/CSS solution.
+
+## Copyright and License
 
 Copyright 2014, eBay Software Foundation under [the BSD license](LICENSE.md).
