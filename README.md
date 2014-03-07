@@ -116,7 +116,7 @@ You may want to extend the plugin further or change some of the code. Here is ho
 ## Feedback and Contributions
 Please do not hesitate to open an issue or send a pull request if something doesn't work or you have ideas for improvement. For instructions on how to contribute to this project please read the [contribution guide](CONTRIBUTING.md).
 
-## <a name="authors"></a>Authors
+## Authors
 
  - Prem Nawaz Khan, primary developer || [https://github.com/mpnkhan](https://github.com/mpnkhan) || [@mpnkhan](https://twitter.com/mpnkhan)
  - Victor Tsaran, user interaction, testing, documentation || [https://github.com/vick08](https://github.com/vick08) || [@vick08](https://twitter.com/vick08)
