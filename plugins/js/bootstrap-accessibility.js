@@ -1,5 +1,5 @@
 /* ========================================================================
-* Extends Bootstrap v3.0.0 
+* Extends Bootstrap v3.0.0
 
 * Copyright (c) <2014> eBay Software Foundation
 
@@ -28,13 +28,13 @@
 
     $('.alert').attr('role', 'alert')
     $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
-    
+
   // TOOLTIP Extension
   // ===============================
 
     var showTooltip =    $.fn.tooltip.Constructor.prototype.show
         , hideTooltip =    $.fn.tooltip.Constructor.prototype.hide
-    
+
     $.fn.tooltip.Constructor.prototype.show = function () {
         showTooltip.apply(this, arguments)
         var $tip = this.tip()
@@ -69,7 +69,7 @@
   //Modal Extension
     $('.modal-dialog').attr( {'role' : 'document'})
     var modalhide =   $.fn.modal.Constructor.prototype.hide
-    $.fn.modal.Constructor.prototype.hide = function(){      
+    $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
        modalOpener.focus()
@@ -84,7 +84,7 @@
       , focusDelay = 200
       , menus = $(toggle).parent().find('ul').attr('role','menu')
       , lis = menus.find('li').attr('role','presentation')
-      
+
     lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
@@ -110,7 +110,7 @@
       var  $par
         , firstItem
       if (!/(32)/.test(e.keyCode)) return
-        $par = $(this).parent()        
+        $par = $(this).parent()
         $(this).trigger ("click")
         e.preventDefault() && e.stopPropagation()
     }
@@ -125,7 +125,7 @@
           $this.parent().find('[data-toggle=dropdown]').attr('aria-expanded','false')
          }
         }, 150)
-       })      
+       })
       .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown)
 
 
@@ -144,7 +144,7 @@
       var tabpanel = $($(this).attr('href'))
         , tab = $(this)
         , tabid = tab.attr('id') || uniqueId('ui-tab')
-      
+
         tab.attr('id', tabid)
 
       if(tab.parent().hasClass('active')){
@@ -155,7 +155,7 @@
         tabpanel.attr( { 'role' : 'tabpanel', 'tabIndex' : '-1', 'aria-hidden' : 'true', 'aria-labelledby':tabid } )
       }
     })
-  
+
     $.fn.tab.Constructor.prototype.keydown = function (e) {
       var $this = $(this)
       , $items
@@ -186,13 +186,13 @@
 
       e.preventDefault()
       e.stopPropagation()
-    }  
+    }
 
     $(document).on('keydown.tab.data-api','[data-toggle="tab"], [data-toggle="pill"]' , $.fn.tab.Constructor.prototype.keydown)
 
    var tabactivate =    $.fn.tab.Constructor.prototype.activate;
    $.fn.tab.Constructor.prototype.activate = function (element, container, callback) {
-      var $active = container.find('> .active') 
+      var $active = container.find('> .active')
       $active.find('[data-toggle=tab]').attr({ 'tabIndex' : '-1','aria-selected' : false,'aria-expanded' : false })
       $active.filter('.tab-pane').attr({ 'aria-hidden' : true,'tabIndex' : '-1' })
 
@@ -213,11 +213,11 @@
         var colltab = $(this)
         , collpanel = $(colltab.attr('href'))
         , parent  = colltab.attr('data-parent')
-        , collparent = parent && $(parent)        
+        , collparent = parent && $(parent)
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
 
         $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
-		
+
           colltab.attr('id', collid)
           if(collparent){
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
@@ -259,9 +259,9 @@
               }else{
                 curTab.attr({ 'aria-selected':'false','aria-expanded':'false'})
                 $curPanel.attr({ 'aria-hidden' : 'true','tabIndex' : '-1' })
-              }            
+              }
           })
-        }      
+        }
       }else{
         collToggle.apply(this, arguments)
       }
@@ -276,7 +276,7 @@
 
       $this = $(this)
       if (!/(32|37|38|39|40)/.test(k)) return
-      if(k==32) $this.click()    
+      if(k==32) $this.click()
 
       $items = $tablist.find('[role=tab]')
       index = $items.index($items.filter(':focus'))
@@ -290,8 +290,8 @@
 
       e.preventDefault()
       e.stopPropagation()
-    
-    }  
+
+    }
 
     $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
 
@@ -303,7 +303,7 @@
           , prev = $this.find('[data-slide="prev"]')
           , next = $this.find('[data-slide="next"]')
           , $options = $this.find('.item')
-          , $listbox = $options.parent() 
+          , $listbox = $options.parent()
 
         $this.attr( { 'data-interval' : 'false', 'data-wrap' : 'false' } )
         $listbox.attr('role', 'listbox')
@@ -344,9 +344,9 @@
         .one($.support.transition.end, function () {
         $active.attr({'aria-selected':false, 'tabIndex': '-1'})
         $next.attr({'aria-selected':true, 'tabIndex': '0'})
-        //.focus()        
+        //.focus()
        })
-      }  
+      }
 
     $.fn.carousel.Constructor.prototype.keydown = function (e) {
      var $this = $(this)
@@ -361,12 +361,12 @@
 
       index = $items.index($items.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
-        $parent.carousel('prev') 
+        $parent.carousel('prev')
         index--
         if(index < 0) index = $items.length -1
         else  $this.prev().focus()
 
-      }                                         
+      }
       if (k == 39 || k == 40) {                          // Down
         $parent.carousel('next')
         index++
@@ -374,15 +374,15 @@
         else  {
           $this.one($.support.transition.end, function () {
             $this.next().focus()
-          })  
-        }          
+          })
+        }
 
-      }  
-  
+      }
+
       e.preventDefault()
       e.stopPropagation()
-    }  
-    $(document).on('keydown.carousel.data-api', 'div[role=option]', $.fn.carousel.Constructor.prototype.keydown) 
+    }
+    $(document).on('keydown.carousel.data-api', 'div[role=option]', $.fn.carousel.Constructor.prototype.keydown)
 
   // GENERAL UTILITY FUNCTIONS
   // ===============================
@@ -402,4 +402,4 @@
     }
 
 
-})(window.jQuery)
+})(jQuery);
