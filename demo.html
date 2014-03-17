@@ -12,11 +12,10 @@
 </title>
 
 <!-- Bootstrap core CSS -->
-<link href="bs3/dist/css/bootstrap.css" rel="stylesheet">
+<link href="bs3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Documentation extras -->
-<link href="bs3/docs/assets/css/docs.css" rel="stylesheet">
-<link href="bs3/docs/assets/css/pygments-manni.css" rel="stylesheet">
+<link href="bs3/docs/assets/css/docs.min.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -31,7 +30,7 @@
     <a class="sr-only" href="#content">Skip navigation</a>
 
     <!-- Docs page layout -->
-    <div class="bs-header" id="content" style="background-color:#0079C2; background-image: url('')">
+    <div class="bs-docs-header" id="content" style="background-color:#0079C2; background-image: url('')">
       <div class="container" style="color:white">
 
         <p>This page is a copy of the <a style="color: white !important; text-decoration: underline !important;" href="http://getbootstrap.com/javascript/" alt="Bootstrap JavaScript Components">Bootstrap JavaScript components</a> page. It has been enhanced with <a style="color: white !important; text-decoration: underline !important;" href="http://www.w3.org/TR/wai-aria/">ARIA roles and states</a> and keyboard navigation for better accessibility. Please see the <a style="color: white !important; text-decoration: underline !important;" href="http://paypal.github.io/bootstrap-accessibility-plugin">Bootstrap Accessibility Plugin project</a> for more information on these enhancements.</p>
@@ -42,7 +41,7 @@
     <div class="container bs-docs-container">
       <div class="row">
         <div class="col-md-3">
-          <div class="bs-sidebar hidden-print" role="navigation" aria-label="List of demo components">
+          <div class="bs-docs-sidebar hidden-print affix" role="navigation" aria-label="List of demo components">
             <ul class="nav bs-sidenav">
               
 <li>
@@ -867,23 +866,24 @@
     </div>
 
     <h3>Live demo</h3>
-    <div class="bs-example" style="padding-bottom: 24px;">
-      <a href="#" class="btn btn-lg btn-danger" data-toggle="popover" title="A Title" data-content="And here's some amazing content. It's very engaging. right?" role="button">Click to toggle popover</a>
+    <div class="bs-example" style="padding-bottom: 24px;">      
+    <button type="button" class="btn btn-lg btn-danger bs-docs-popover" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
     </div>
 
     <h4>Four directions</h4>
     <div class="bs-example tooltip-demo">
       <div class="bs-example-tooltips">
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
           Popover on left
         </button>
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
           Popover on top
         </button>
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
           Popover on bottom
         </button>
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
           Popover on right
         </button>
       </div>
@@ -1593,10 +1593,7 @@
 <script src="bs3/js/tests/vendor/jquery.js"></script>
 <script src="bs3/dist/js/bootstrap.min.js"></script>
 
-
-
-<script src="bs3/docs/assets/js/vendor/holder.js"></script>
-<script src="bs3/docs/assets/js/application.js"></script>
+<script src="bs3/docs/assets/js/docs.min.js"></script>
 
 <script type="text/javascript">
   var lazyLoad=function(jsWithPath, callback) {
