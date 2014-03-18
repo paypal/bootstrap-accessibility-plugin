@@ -1,5 +1,5 @@
 /* ========================================================================
-* Extends Bootstrap v3.1.0
+* Extends Bootstrap v3.1.1
 
 * Copyright (c) <2014> eBay Software Foundation
 
