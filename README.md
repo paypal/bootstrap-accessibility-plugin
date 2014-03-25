@@ -119,7 +119,7 @@ Please do not hesitate to open an issue or send a pull request if something does
 ## Authors
 
  - Prem Nawaz Khan, primary developer || [https://github.com/mpnkhan](https://github.com/mpnkhan) || [@mpnkhan](https://twitter.com/mpnkhan)
- - Victor Tsaran, user interaction, testing, documentation || [https://github.com/vick08](https://github.com/vick08) || [@vick08](https://twitter.com/vick08)
+ - Victor Tsaran, project manager, user interaction, testing, documentation || [https://github.com/vick08](https://github.com/vick08) || [@vick08](https://twitter.com/vick08)
  - Dennis Lembree, developer, user interaction, testing || [https://github.com/weboverhauls](https://github.com/weboverhauls) || [@dennisl](https://twitter.com/dennisl)
  - Srinivasu Chakravarthula, user interaction, testing || [@csrinivasu](https://twitter.com/csrinivasu)
  - Cathy O'Connor, design || [@cagocon](https://twitter.com/cagocon)
