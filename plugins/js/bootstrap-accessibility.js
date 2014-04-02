@@ -46,6 +46,7 @@
     $.fn.tooltip.Constructor.prototype.hide = function () {
         hideTooltip.apply(this, arguments)
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
+        return this
     }
 
   // Popover Extension
