@@ -212,7 +212,7 @@
       $colltabs.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
       $colltabs.each(function( index ) {
         var colltab = $(this)
-        , collpanel = $(colltab.attr('href'))
+        , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
         , parent  = colltab.attr('data-parent')
         , collparent = parent && $(parent)
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
