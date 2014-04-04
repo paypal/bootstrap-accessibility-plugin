@@ -1625,7 +1625,15 @@
     document.getElementsByTagName('head')[0].appendChild(script);
   }
 
+  var btn = document.getElementById('allyBtn');
+  var scriptLoaded=false;
+
   var loadPlugin = function(){
+    if(scriptLoaded ===true)  {
+      location.reload(false);
+      return false;
+    };
+
     var lin=document.createElement('link');
     lin.setAttribute('rel','stylesheet');
     lin.setAttribute('type','text/css');
@@ -1635,10 +1643,11 @@
     var script = document.createElement('script');
     script.src = 'plugins/js/bootstrap-accessibility.min.js';
     document.getElementsByTagName('head')[0].appendChild(script);
-  }
-    
-  var btn = document.getElementById('allyBtn');
 
+    btn.innerHTML = "unload bootstrap accessibility plugin features";
+    scriptLoaded = true;
+  }
+ 
   if (window.addEventListener){
     btn.addEventListener("click", function(){
        loadPlugin();
