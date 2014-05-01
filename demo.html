@@ -3,28 +3,32 @@
   <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<title> 
-  Accessibility Plugin for Twitter Bootstrap JavaScript components
-</title>
+    <title> 
+      Accessibility Plugin for Twitter Bootstrap JavaScript components
+    </title>
 
-<!-- Bootstrap core CSS -->
-<link href="bs3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="bs3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Documentation extras -->
-<link href="bs3/docs/assets/css/docs.min.css" rel="stylesheet">
+    <!-- Documentation extras -->
+    <link href="bs3/docs/assets/css/docs.min.css" rel="stylesheet">
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="../docs/assets/js/html5shiv.js"></script>
-  <script src="../docs/assets/js/respond.min.js"></script>
-<![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../docs/assets/js/html5shiv.js"></script>
+      <script src="../docs/assets/js/respond.min.js"></script>
+    <![endif]-->
 
-<link href="plugins/css/bootstrap-accessibility.css" rel="stylesheet">
-
+    <style>
+      .bs-docs-header a {
+        color: white !important; 
+        text-decoration: underline !important;
+      }
+    </style>
   </head>
   <body>
     <a class="sr-only" href="#content">Skip navigation</a>
@@ -33,7 +37,11 @@
     <div class="bs-docs-header" id="content" style="background-color:#0079C2; background-image: url('')">
       <div class="container" style="color:white">
 
-        <p>This page is a copy of the <a style="color: white !important; text-decoration: underline !important;" href="http://getbootstrap.com/javascript/" alt="Bootstrap JavaScript Components">Bootstrap JavaScript components</a> page. It has been enhanced with <a style="color: white !important; text-decoration: underline !important;" href="http://www.w3.org/TR/wai-aria/">ARIA roles and states</a> and keyboard navigation for better accessibility. Please see the <a style="color: white !important; text-decoration: underline !important;" href="http://paypal.github.io/bootstrap-accessibility-plugin">Bootstrap Accessibility Plugin project</a> for more information on these enhancements.</p>
+        <p>
+          This page demonstrates the use of the <a href="https://github.com/paypal/bootstrap-accessibility-plugin"> Bootstrap Accessibility Plugin </a> on default <a href="http://getbootstrap.com/javascript/">Bootstrap components</a>. In order to show you the difference in the user experience, the plugin is not applied to this page by default. To try out the widgets on this page with or without the Bootstrap Accessibility Plugin, please 
+          <a href="#" id="allyBtn"> load bootstrap accessibility plugin features</a>.
+        </p>
+
       </div>
     </div>
      <!-- Comment ends -->
@@ -1616,19 +1624,42 @@
     document.getElementsByTagName('head')[0].appendChild(script);
   }
 
+  var btn = document.getElementById('allyBtn');
+  var scriptLoaded=false;
+
+  var loadPlugin = function(){
+    if(scriptLoaded ===true)  {
+      location.reload(false);
+      return false;
+    };
+
+    var lin=document.createElement('link');
+    lin.setAttribute('rel','stylesheet');
+    lin.setAttribute('type','text/css');
+    lin.setAttribute('href', 'plugins/css/bootstrap-accessibility.css');
+    document.getElementsByTagName('head')[0].appendChild(lin);
+
+    var script = document.createElement('script');
+    script.src = 'plugins/js/bootstrap-accessibility.min.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+
+    btn.innerHTML = "unload bootstrap accessibility plugin features";
+    scriptLoaded = true;
+  }
+ 
   if (window.addEventListener){
-    window.addEventListener("load", function(){
-       lazyLoad('plugins/js/bootstrap-accessibility.min.js');
+    btn.addEventListener("click", function(){
+       loadPlugin();
+       return false;
     }, false);
   }else if (window.attachEvent) {
-    window.attachEvent("onload", function(){
-       lazyLoad('plugins/js/bootstrap-accessibility.min.js');
+    btn.attachEvent("onload", function(){
+       loadPlugin();
+       return false;
     });
   }
-  // lazyLoad('plugins/js/bootstrap-accessibility.min.js');
 
   </script>
 
 </body>
 </html>
-
