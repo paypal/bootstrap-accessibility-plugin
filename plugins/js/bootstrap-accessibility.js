@@ -149,10 +149,10 @@
         tab.attr('id', tabid)
 
       if(tab.parent().hasClass('active')){
-        tab.attr( { 'tabIndex' : '0', 'aria-expanded' : 'true', 'aria-selected' : 'true', 'aria-controls': tab.attr('href').substr(1) } )
+        tab.attr( { 'tabIndex' : '0', 'aria-selected' : 'true', 'aria-controls': tab.attr('href').substr(1) } )
         tabpanel.attr({ 'role' : 'tabpanel', 'tabIndex' : '0', 'aria-hidden' : 'false', 'aria-labelledby':tabid })
       }else{
-        tab.attr( { 'tabIndex' : '-1', 'aria-expanded' : 'false', 'aria-selected' : 'false', 'aria-controls': tab.attr('href').substr(1) } )
+        tab.attr( { 'tabIndex' : '-1', 'aria-selected' : 'false', 'aria-controls': tab.attr('href').substr(1) } )
         tabpanel.attr( { 'role' : 'tabpanel', 'tabIndex' : '-1', 'aria-hidden' : 'true', 'aria-labelledby':tabid } )
       }
     })
@@ -194,13 +194,13 @@
    var tabactivate =    $.fn.tab.Constructor.prototype.activate;
    $.fn.tab.Constructor.prototype.activate = function (element, container, callback) {
       var $active = container.find('> .active')
-      $active.find('[data-toggle=tab]').attr({ 'tabIndex' : '-1','aria-selected' : false,'aria-expanded' : false })
+      $active.find('[data-toggle=tab]').attr({ 'tabIndex' : '-1','aria-selected' : false })
       $active.filter('.tab-pane').attr({ 'aria-hidden' : true,'tabIndex' : '-1' })
 
       tabactivate.apply(this, arguments)
 
       element.addClass('active')
-      element.find('[data-toggle=tab]').attr({ 'tabIndex' : '0','aria-selected' : true,'aria-expanded' : true })
+      element.find('[data-toggle=tab]').attr({ 'tabIndex' : '0','aria-selected' : true })
       element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '0' })
    }
 
