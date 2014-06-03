@@ -133,7 +133,7 @@
   // Tab Extension
   // ===============================
 
-    var $tablist = $('.nav-tabs')
+    var $tablist = $('.nav-tabs, .nav-pills')
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
@@ -194,13 +194,13 @@
    var tabactivate =    $.fn.tab.Constructor.prototype.activate;
    $.fn.tab.Constructor.prototype.activate = function (element, container, callback) {
       var $active = container.find('> .active')
-      $active.find('[data-toggle=tab]').attr({ 'tabIndex' : '-1','aria-selected' : false })
+      $active.find('[data-toggle=tab], [data-toggle=pill]').attr({ 'tabIndex' : '-1','aria-selected' : false })
       $active.filter('.tab-pane').attr({ 'aria-hidden' : true,'tabIndex' : '-1' })
 
       tabactivate.apply(this, arguments)
 
       element.addClass('active')
-      element.find('[data-toggle=tab]').attr({ 'tabIndex' : '0','aria-selected' : true })
+      element.find('[data-toggle=tab], [data-toggle=pill]').attr({ 'tabIndex' : '0','aria-selected' : true })
       element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '0' })
    }
 
