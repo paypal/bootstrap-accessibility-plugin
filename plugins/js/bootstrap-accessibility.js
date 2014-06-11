@@ -14,24 +14,43 @@
 * Neither the name of eBay or any of its subsidiaries or affiliates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 * ======================================================================== */
+  
+ 
+ (function($) { 
+  "use strict"; 
 
-(function($) {
-  "use strict";
-
+  // GENERAL UTILITY FUNCTIONS
+  // ===============================
+  
   var uniqueId = function(prefix) {
       return (prefix || 'ui-id') + '-' + Math.floor((Math.random()*1000)+1)
   }
 
-  // Alert Extension
-  // ===============================
+  
+  var removeMultiValAttributes = function (el, attr, val) {
+   var describedby = (el.attr( attr ) || "").split( /\s+/ )
+      , index = $.inArray(val, describedby)
+   if ( index !== -1 ) {
+     describedby.splice( index, 1 )
+   }
+   describedby = $.trim( describedby.join( " " ) )
+   if (describedby ) {
+     el.attr( attr, describedby )
+   } else {
+    el.removeAttr( attr )
+   }
+  }
+// Alert Extension
+// ===============================
 
-    $('.alert').attr('role', 'alert')
-    $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
+$('.alert').attr('role', 'alert')
+$('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
 
   // TOOLTIP Extension
   // ===============================
-
+  
     var showTooltip =    $.fn.tooltip.Constructor.prototype.show
         , hideTooltip =    $.fn.tooltip.Constructor.prototype.hide
 
@@ -48,10 +67,10 @@
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
         return this
     }
-
   // Popover Extension
   // ===============================
-    var showPopover =   $.fn.popover.Constructor.prototype.setContent
+  
+  var showPopover =   $.fn.popover.Constructor.prototype.setContent
       , hideTPopover =   $.fn.popover.Constructor.prototype.hide
 
     $.fn.popover.Constructor.prototype.setContent = function(){
@@ -66,20 +85,20 @@
         hideTooltip.apply(this, arguments)
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
     }
+  // Modal Extension
+  // ===============================
 
-  //Modal Extension
-    $('.modal-dialog').attr( {'role' : 'document'})
+	$('.modal-dialog').attr( {'role' : 'document'})
     var modalhide =   $.fn.modal.Constructor.prototype.hide
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
        modalOpener.focus()
     }
-
   // DROPDOWN Extension
   // ===============================
-
-    var toggle   = '[data-toggle=dropdown]'
+  
+  var toggle   = '[data-toggle=dropdown]'
       , $par
       , firstItem
       , focusDelay = 200
@@ -128,12 +147,10 @@
         }, 150)
        })
       .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown)
-
-
   // Tab Extension
   // ===============================
-
-    var $tablist = $('.nav-tabs, .nav-pills')
+  
+  var $tablist = $('.nav-tabs, .nav-pills')
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
@@ -204,11 +221,10 @@
       element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '0' })
    }
 
-
   // Collapse Extension
   // ===============================
 
-      var $colltabs =  $('[data-toggle="collapse"]')
+     var $colltabs =  $('[data-toggle="collapse"]')
       $colltabs.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
       $colltabs.each(function( index ) {
         var colltab = $(this)
@@ -295,10 +311,10 @@
     }
 
     $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
-
+    
   // Carousel Extension
   // ===============================
-
+  
       $('.carousel').each(function (index) {
         var $this = $(this)
           , prev = $this.find('[data-slide="prev"]')
@@ -385,22 +401,4 @@
     }
     $(document).on('keydown.carousel.data-api', 'div[role=option]', $.fn.carousel.Constructor.prototype.keydown)
 
-  // GENERAL UTILITY FUNCTIONS
-  // ===============================
-
-    var removeMultiValAttributes = function (el, attr, val) {
-     var describedby = (el.attr( attr ) || "").split( /\s+/ )
-        , index = $.inArray(val, describedby)
-     if ( index !== -1 ) {
-       describedby.splice( index, 1 )
-     }
-     describedby = $.trim( describedby.join( " " ) )
-     if (describedby ) {
-       el.attr( attr, describedby )
-     } else {
-      el.removeAttr( attr )
-     }
-    }
-
-
-})(jQuery);
+ })(jQuery);
