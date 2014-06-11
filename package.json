@@ -8,7 +8,8 @@
   "dependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-uglify": "~0.2.4"
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-concat": "0.4.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -17,13 +18,19 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/paypal/bootstrap-accessibility-plugin.git"
-  },  
+  },
   "licenses": [
     {
       "type": "BSD",
       "url": "https://github.com/paypal/bootstrap-accessibility-plugin/blob/master/LICENSE.md"
     }
   ],
-  "gitHead": "36fb701ff2cf27ae97b1c3ba5f865bce19bf64e3",
-  "readmeFilename": "README.md"
+  "bugs": {
+    "url": "https://github.com/paypal/bootstrap-accessibility-plugin/issues"
+  },
+  "keywords": [
+    "bootstrap",
+    "accessibility"
+  ],
+  "license": "BSD"
 }
