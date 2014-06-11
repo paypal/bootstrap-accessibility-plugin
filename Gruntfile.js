@@ -74,14 +74,29 @@ module.exports = function(grunt) {
 					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js'
 				}
 			}
-		}
+		},
+
+		compass: {
+			dist: {
+				options: {
+					sassDir: 'src/sass',
+					cssDir: 'plugins/css',
+					environment: 'production',
+					outputStyle: 'compressed'
+				}
+			}
+		},		
+
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-compass');
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('join', 'concat');
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+	grunt.registerTask('css', 'compass');
+
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'compass']);
 };
