@@ -13,6 +13,7 @@
       this.$element.focus()
     }
     $.fn.popover.Constructor.prototype.hide =  function(){
-        hideTooltip.apply(this, arguments)
+        hideTPopover.apply(this, arguments)
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
+		return this
     }
