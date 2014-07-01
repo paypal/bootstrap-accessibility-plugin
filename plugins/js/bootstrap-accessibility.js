@@ -71,7 +71,7 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
   // ===============================
   
   var showPopover =   $.fn.popover.Constructor.prototype.setContent
-      , hideTPopover =   $.fn.popover.Constructor.prototype.hide
+      , hidePopover =   $.fn.popover.Constructor.prototype.hide
 
     $.fn.popover.Constructor.prototype.setContent = function(){
       showPopover.apply(this, arguments)
@@ -82,9 +82,11 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       this.$element.focus()
     }
     $.fn.popover.Constructor.prototype.hide =  function(){
-        hideTooltip.apply(this, arguments)
+        hidePopover.apply(this, arguments)
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
+        return this
     }
+
   // Modal Extension
   // ===============================
 
@@ -93,6 +95,7 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
+       console.log('modalOpener' , modalOpener)
        modalOpener.focus()
     }
   // DROPDOWN Extension
