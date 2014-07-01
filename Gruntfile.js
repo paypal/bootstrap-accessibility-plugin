@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 
 	grunt.registerTask('test', ['jshint']);
-	grunt.registerTask('join', 'concat');
+	grunt.registerTask('js', ['jshint', 'concat', 'uglify']);
 	grunt.registerTask('css', 'compass');
 
 	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'compass']);
