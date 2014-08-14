@@ -98,15 +98,20 @@ You may want to extend the plugin further or change some of the code. Here is ho
 
 1. Get NodeJS from [http://nodejs.org](http://nodejs.org)
 2. Clone the latest code from [https://github.com/paypal/bootstrap-accessibility-plugin.git](https://github.com/paypal/bootstrap-accessibility-plugin.git)
-3. Install and run grunt from the root of this project:
+3. Go to the root of this project and install Compass and Sass:
 
   ```sh
    cd bootstrap-accessibility-plugin
+   sudo gem install compass
+  ```
+4. Install and run grunt:
+
+  ```sh
    sudo npm install grunt-cli -g
    npm install
    grunt
   ```
-4. To run the examples you will need to initialize the git submodules:
+5. To run the examples, initialize the git submodules:
  
   ```sh
   git submodule init
