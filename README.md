@@ -15,14 +15,21 @@ If you use Bootstrap library (version 3.x) on your website, your pages will now 
 3. Download and include the [bootstrap accessibility plugin css](plugins/css) to override css styles.
 4. Optional: Lazily load the JavaScript plugin after the page is loaded ([example](demo.html)).
 5. For basic implementation:
-```html
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/bootstrap-accessibility.css">
 
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/bootstrap-accessibility.min.js"></script>
-```   
+  ```html
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/css/bootstrap-accessibility.css">
+
+   <script src="http://code.jquery.com/jquery.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+   <script src="/js/bootstrap-accessibility.min.js"></script>
+  ```
+6. You can also install it from npm or bower:
+
+  ```sh
+   bower install bootstrapaccessibilityplugin
+   npm install bootstrap-accessibility-plugin
+  ```
 
 ## Which components become accessible?
 - Alert
