@@ -95,6 +95,7 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
+       console.log('modalOpener' , modalOpener)
        modalOpener.focus()
     }
   // DROPDOWN Extension
@@ -241,10 +242,10 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
           if(collparent){
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
             if(collpanel.hasClass('in')){
-              colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
+              colltab.attr({ 'aria-controls': colltab.attr('href').substr(1), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
             }else{
-              colltab.attr({'aria-controls' : collpanel.attr('id'), 'tabindex':'-1' })
+              colltab.attr({'aria-controls' : colltab.attr('href').substr(1), 'tabindex':'-1' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
             }
           }
@@ -360,18 +361,16 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
         slideCarousel.apply(this, arguments)
 
       $active
-        .one('bsTransitionEnd', function () {
-          $active.attr({'aria-selected':false, 'tabIndex': '-1'})
-          $next.attr({'aria-selected':true, 'tabIndex': '0'})
-            //.focus()
+        .one($.support.transition.end, function () {
+        $active.attr({'aria-selected':false, 'tabIndex': '-1'})
+        $next.attr({'aria-selected':true, 'tabIndex': '0'})
+        //.focus()
        })
       }
 
-     var $this;
-     $.fn.carousel.Constructor.prototype.keydown = function (e) {
-     $this = $this || $(this)
-     if(this instanceof Node) $this = $(this)
-     var $ul = $this.closest('div[role=listbox]')
+    $.fn.carousel.Constructor.prototype.keydown = function (e) {
+     var $this = $(this)
+      , $ul = $this.closest('div[role=listbox]')
       , $items = $ul.find('[role=option]')
       , $parent = $ul.parent()
       , k = e.which || e.keyCode
@@ -379,31 +378,23 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       , i
 
       if (!/(37|38|39|40)/.test(k)) return
+
       index = $items.index($items.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
-        
+        $parent.carousel('prev')
         index--
         if(index < 0) index = $items.length -1
-        else  {
-          $parent.carousel('prev')
-          setTimeout(function () {
-            $items[index].focus()
-            // $this.prev().focus()
-          }, 150)      
-        }  
+        else  $this.prev().focus()
 
       }
       if (k == 39 || k == 40) {                          // Down
+        $parent.carousel('next')
         index++
-        if(index == $items.length) {
-          index = 0
-        }  
+        if(index == $items.length) index = 0
         else  {
-          $parent.carousel('next')
-          setTimeout(function () {
-            $items[index].focus()
-            // $this.next().focus()
-          }, 150)            
+          $this.one($.support.transition.end, function () {
+            $this.next().focus()
+          })
         }
 
       }
@@ -412,6 +403,5 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       e.stopPropagation()
     }
     $(document).on('keydown.carousel.data-api', 'div[role=option]', $.fn.carousel.Constructor.prototype.keydown)
-
 
  })(jQuery);

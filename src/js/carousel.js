@@ -44,16 +44,18 @@
         slideCarousel.apply(this, arguments)
 
       $active
-        .one($.support.transition.end, function () {
-        $active.attr({'aria-selected':false, 'tabIndex': '-1'})
-        $next.attr({'aria-selected':true, 'tabIndex': '0'})
-        //.focus()
+        .one('bsTransitionEnd', function () {
+          $active.attr({'aria-selected':false, 'tabIndex': '-1'})
+          $next.attr({'aria-selected':true, 'tabIndex': '0'})
+            //.focus()
        })
       }
 
-    $.fn.carousel.Constructor.prototype.keydown = function (e) {
-     var $this = $(this)
-      , $ul = $this.closest('div[role=listbox]')
+     var $this;
+     $.fn.carousel.Constructor.prototype.keydown = function (e) {
+     $this = $this || $(this)
+     if(this instanceof Node) $this = $(this)
+     var $ul = $this.closest('div[role=listbox]')
       , $items = $ul.find('[role=option]')
       , $parent = $ul.parent()
       , k = e.which || e.keyCode
@@ -61,23 +63,31 @@
       , i
 
       if (!/(37|38|39|40)/.test(k)) return
-
       index = $items.index($items.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
-        $parent.carousel('prev')
+        
         index--
         if(index < 0) index = $items.length -1
-        else  $this.prev().focus()
+        else  {
+          $parent.carousel('prev')
+          setTimeout(function () {
+            $items[index].focus()
+            // $this.prev().focus()
+          }, 150)      
+        }  
 
       }
       if (k == 39 || k == 40) {                          // Down
-        $parent.carousel('next')
         index++
-        if(index == $items.length) index = 0
+        if(index == $items.length) {
+          index = 0
+        }  
         else  {
-          $this.one($.support.transition.end, function () {
-            $this.next().focus()
-          })
+          $parent.carousel('next')
+          setTimeout(function () {
+            $items[index].focus()
+            // $this.next().focus()
+          }, 150)            
         }
 
       }
