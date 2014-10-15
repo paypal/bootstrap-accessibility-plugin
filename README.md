@@ -40,6 +40,7 @@ If you use Bootstrap library (version 3.x) on your website, your pages will now 
 - Tab panel
 - Collapse
 - Carousel
+- Button
 
 ## Plugin Live Demo
 Feel free to play with the [live demo](demo.html) of the components listed above and the Bootstrap Accessibility Plugin in action. Seeing how "accessified" widgets work in this demo will help you verify whether the plugin is installed correctly on your website.
@@ -99,6 +100,11 @@ Feel free to play with the [live demo](demo.html) of the components listed above
 6. Add keydown event listener for the carousel to work with keyboard.
 7. Dynamically change tabIndex and aria-selected property of active and inactive tabs.
 8. Remove display:none and hide (offscreen) of the inactive carousel items, so that screen readers can count the total number of carousel items.
+
+### Button
+1. Add role of button and tabIndex for radio and checkbox toggle buttons.
+2. Add keydown event listener for radio and checkbox toggle buttons to work with keyboard.
+3. Add aria-pressed for toggle buttons.
 
 ## Re-compiling
 You may want to extend the plugin further or change some of the code. Here is how to do it:
