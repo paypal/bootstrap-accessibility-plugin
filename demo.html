@@ -49,7 +49,7 @@
     <div class="container bs-docs-container">
       <div class="row">
         <div class="col-md-3">
-          <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" role="navigation" aria-label="List of demo components">
+          <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm" role="navigation" aria-label="List of demo components">
             <ul class="nav bs-docs-sidenav">                          
               <li>
                 <a href="#modals">Modal</a>
@@ -70,20 +70,6 @@
                 <ul class="nav">
                   <li><a href="#tabs-examples">Examples</a></li>
                   <li><a href="#tabs-usage">Usage</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#tooltips">Tooltip</a>
-                <ul class="nav">
-                  <li><a href="#tooltips-examples">Examples</a></li>
-                  <li><a href="#tooltips-usage">Usage</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#popovers">Popover</a>
-                <ul class="nav">
-                  <li><a href="#popovers-examples">Examples</a></li>
-                  <li><a href="#popovers-usage">Usage</a></li>
                 </ul>
               </li>
               <li>
@@ -635,416 +621,6 @@
 
 
 
-  <!-- Tooltips
-  ================================================== -->
-  <div class="bs-docs-section">
-    <div class="page-header">
-      <h1 id="tooltips">Tooltips <small>tooltip.js</small></h1>
-    </div>
-
-    <h2 id="tooltips-examples">Examples</h2>
-    <p>Inspired by the excellent jQuery.tipsy plugin written by Jason Frame; Tooltips are an updated version, which don't rely on images, use CSS3 for animations, and data-attributes for local title storage.</p>
-    <p>Hover over the links below to see tooltips:</p>
-    <div class="bs-example tooltip-demo">
-      <p class="muted" style="margin-bottom: 0;">Tight pants next level keffiyeh <a href="#" data-toggle="tooltip" title="Default tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-toggle="tooltip" title="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A really ironic artisan <a href="#" data-toggle="tooltip" title="Another one here too">whatever keytar</a>, scenester farm-to-table banksy Austin <a href="#" data-toggle="tooltip" title="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.
-      </p>
-    </div><!-- /example -->
-
-    <h3>Four directions</h3>
-    <div class="bs-example tooltip-demo">
-      <div class="bs-example-tooltips">
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
-      </div>
-    </div><!-- /example -->
-
-    <div class="bs-callout bs-callout-info">
-      <h4>Tooltips in button groups and input groups require special setting</h4>
-      <p>When using tooltips on elements within a <code>.btn-group</code> or an <code>.input-group</code>, you'll have to specify the option <code>container: 'body'</code> (documented below) to avoid unwanted side effects (such as the element growing wider and/or losing its rounded corners when the tooltip is triggered).</p>
-    </div>
-    <div class="bs-callout bs-callout-info">
-      <h4>Tooltips on disabled elements require wrapper elements</h4>
-      <p>To add a tooltip to a <code>disabled</code> or <code>.disabled</code> element, put the element inside of a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>, and apply the tooltip to that element instead.</p>
-    </div>
-
-    <h2 id="tooltips-usage">Usage</h2>
-    <p>Trigger the tooltip via JavaScript:</p>
-<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#example&#39;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
-</code></pre></div>
-
-    <h3>Options</h3>
-    <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to <code>data-</code>, as in <code>data-animation=""</code>.</p>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-         <tr>
-           <th style="width: 100px;">Name</th>
-           <th style="width: 100px;">type</th>
-           <th style="width: 50px;">default</th>
-           <th>description</th>
-         </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td>animation</td>
-           <td>boolean</td>
-           <td>true</td>
-           <td>apply a CSS fade transition to the tooltip</td>
-         </tr>
-         <tr>
-           <td>html</td>
-           <td>boolean</td>
-           <td>false</td>
-           <td>Insert HTML into the tooltip. If false, jQuery's <code>text</code> method will be used to insert content into the DOM. Use text if you're worried about XSS attacks.</td>
-         </tr>
-         <tr>
-           <td>placement</td>
-           <td>string | function</td>
-           <td>'top'</td>
-           <td>how to position the tooltip - top | bottom | left | right | auto. <br> When "auto" is specified, it will dynamically reorient the tooltip. For example, if placement is "auto left", the tooltip will display to the left when possible, otherwise it will display right.</td>
-         </tr>
-         <tr>
-           <td>selector</td>
-           <td>string</td>
-           <td>false</td>
-           <td>If a selector is provided, tooltip objects will be delegated to the specified targets.</td>
-         </tr>
-         <tr>
-           <td>title</td>
-           <td>string | function</td>
-           <td>''</td>
-           <td>default title value if <code>title</code> attribute isn't present</td>
-         </tr>
-         <tr>
-           <td>trigger</td>
-           <td>string</td>
-           <td>'hover focus'</td>
-           <td>how tooltip is triggered - click | hover | focus | manual. You may pass multiple triggers; separate them with a space.</td>
-         </tr>
-         <tr>
-           <td>delay</td>
-           <td>number | object</td>
-           <td>0</td>
-           <td>
-            <p>delay showing and hiding the tooltip (ms) - does not apply to manual trigger type</p>
-            <p>If a number is supplied, delay is applied to both hide/show</p>
-            <p>Object structure is: <code>delay: { show: 500, hide: 100 }</code></p>
-           </td>
-         </tr>
-         <tr>
-           <td>container</td>
-           <td>string | false</td>
-           <td>false</td>
-           <td>
-            <p>Appends the tooltip to a specific element. Example: <code>container: 'body'</code></p>
-           </td>
-         </tr>
-        </tbody>
-      </table>
-    </div><!-- /.table-responsive -->
-    <div class="bs-callout bs-callout-info">
-      <h4>Data attributes for individual tooltips</h4>
-      <p>Options for individual tooltips can alternatively be specified through the use of data attributes, as explained above.</p>
-    </div>
-
-    <h3>Markup</h3>
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">data-toggle=</span><span class="s">&quot;tooltip&quot;</span> <span class="na">title=</span><span class="s">&quot;first tooltip&quot;</span><span class="nt">&gt;</span>Hover over me<span class="nt">&lt;/a&gt;</span>
-</code></pre></div>
-
-    <h3>Methods</h3>
-
-    <h4>$().tooltip(options)</h4>
-    <p>Attaches a tooltip handler to an element collection.</p>
-
-    <h4>.tooltip('show')</h4>
-    <p>Reveals an element's tooltip.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.tooltip('hide')</h4>
-    <p>Hides an element's tooltip.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.tooltip('toggle')</h4>
-    <p>Toggles an element's tooltip.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;toggle&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.tooltip('destroy')</h4>
-    <p>Hides and destroys an element's tooltip.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h3>Events</h3>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-         <tr>
-           <th style="width: 150px;">Event Type</th>
-           <th>Description</th>
-         </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td>show.bs.tooltip</td>
-           <td>This event fires immediately when the <code>show</code> instance method is called.</td>
-         </tr>
-         <tr>
-           <td>shown.bs.tooltip</td>
-           <td>This event is fired when the tooltip has been made visible to the user (will wait for CSS transitions to complete).</td>
-         </tr>
-         <tr>
-           <td>hide.bs.tooltip</td>
-           <td>This event is fired immediately when the <code>hide</code> instance method has been called.</td>
-         </tr>
-         <tr>
-           <td>hidden.bs.tooltip</td>
-           <td>This event is fired when the tooltip has finished being hidden from the user (will wait for CSS transitions to complete).</td>
-         </tr>
-        </tbody>
-      </table>
-    </div><!-- /.table-responsive -->
-<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myTooltip&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hidden.bs.tooltip&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// do something…</span>
-<span class="p">})</span>
-</code></pre></div>
-  </div>
-
-  <!-- Popovers
-  ================================================== -->
-  <div class="bs-docs-section">
-    <div class="page-header">
-      <h1 id="popovers">Popovers <small>popover.js</small></h1>
-    </div>
-
-    <h2 id="popovers-examples">Examples</h2>
-    <p>Add small overlays of content, like those on the iPad, to any element for housing secondary information.</p>
-
-    <div class="bs-callout bs-callout-danger">
-      <h4>Plugin dependency</h4>
-      <p>Popovers require the <a href="#tooltips">tooltip plugin</a> to be included in your version of Bootstrap.</p>
-    </div>
-    <div class="bs-callout bs-callout-info">
-      <h4>Popovers in button groups and input groups require special setting</h4>
-      <p>When using popovers on elements within a <code>.btn-group</code> or an <code>.input-group</code>, you'll have to specify the option <code>container: 'body'</code> (documented below) to avoid unwanted side effects (such as the element growing wider and/or losing its rounded corners when the popover is triggered).</p>
-    </div>
-    <div class="bs-callout bs-callout-info">
-      <h4>Popovers on disabled elements require wrapper elements</h4>
-      <p>To add a popover to a <code>disabled</code> or <code>.disabled</code> element, put the element inside of a <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>, and apply the popover to that element instead.</p>
-    </div>
-
-    <h3>Static popover</h3>
-    <p>Four options are available: top, right, bottom, and left aligned.</p>
-    <div class="bs-example bs-example-popover">
-      <div class="popover top">
-        <div class="arrow"></div>
-        <h3 class="popover-title">Popover top</h3>
-        <div class="popover-content">
-          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-        </div>
-      </div>
-
-      <div class="popover right">
-        <div class="arrow"></div>
-        <h3 class="popover-title">Popover right</h3>
-        <div class="popover-content">
-          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-        </div>
-      </div>
-
-      <div class="popover bottom">
-        <div class="arrow"></div>
-        <h3 class="popover-title">Popover bottom</h3>
-        <div class="popover-content">
-          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-        </div>
-      </div>
-
-      <div class="popover left">
-        <div class="arrow"></div>
-        <h3 class="popover-title">Popover left</h3>
-        <div class="popover-content">
-          <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-        </div>
-      </div>
-
-      <div class="clearfix"></div>
-    </div>
-
-    <h3>Live demo</h3>
-    <div class="bs-example" style="padding-bottom: 24px;">      
-    <button type="button" class="btn btn-lg btn-danger bs-docs-popover" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-
-    </div>
-
-    <h4>Four directions</h4>
-    <div class="bs-example tooltip-demo">
-      <div class="bs-example-tooltips">
-        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on left
-        </button>
-        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on top
-        </button>
-        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on bottom
-        </button>
-        <button type="button" class="btn btn-default bs-docs-popover" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-          Popover on right
-        </button>
-      </div>
-    </div><!-- /example -->
-
-
-    <h2 id="popovers-usage">Usage</h2>
-    <p>Enable popovers via JavaScript:</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#example&#39;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
-</code></pre></div>
-
-    <h3>Options</h3>
-    <p>Options can be passed via data attributes or JavaScript. For data attributes, append the option name to <code>data-</code>, as in <code>data-animation=""</code>.</p>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th style="width: 100px;">Name</th>
-            <th style="width: 100px;">type</th>
-            <th style="width: 50px;">default</th>
-            <th>description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>animation</td>
-            <td>boolean</td>
-            <td>true</td>
-            <td>apply a CSS fade transition to the tooltip</td>
-          </tr>
-          <tr>
-            <td>html</td>
-            <td>boolean</td>
-            <td>false</td>
-            <td>Insert HTML into the popover. If false, jQuery's <code>text</code> method will be used to insert content into the DOM. Use text if you're worried about XSS attacks.</td>
-          </tr>
-          <tr>
-            <td>placement</td>
-            <td>string | function</td>
-            <td>'right'</td>
-            <td>how to position the popover - top | bottom | left | right | auto.<br> When "auto" is specified, it will dynamically reorient the popover. For example, if placement is "auto left", the tooltip will display to the left when possible, otherwise it will display right.</td>
-          </tr>
-          <tr>
-            <td>selector</td>
-            <td>string</td>
-            <td>false</td>
-            <td>if a selector is provided, tooltip objects will be delegated to the specified targets if a selector is provided, tooltip objects will be delegated to the specified targets. in practice, this is used to enable dynamic HTML content to have popovers added. See <a href="https://github.com/twbs/bootstrap/issues/4215">this</a> and <a href="http://jsfiddle.net/fScua/">an informative example</a>.</td>
-          </tr>
-          <tr>
-            <td>trigger</td>
-            <td>string</td>
-            <td>'click'</td>
-            <td>how popover is triggered - click | hover | focus | manual</td>
-          </tr>
-          <tr>
-            <td>title</td>
-            <td>string | function</td>
-            <td>''</td>
-            <td>default title value if <code>title</code> attribute isn't present</td>
-          </tr>
-          <tr>
-            <td>content</td>
-            <td>string | function</td>
-            <td>''</td>
-            <td>default content value if <code>data-content</code> attribute isn't present</td>
-          </tr>
-          <tr>
-            <td>delay</td>
-            <td>number | object</td>
-            <td>0</td>
-            <td>
-             <p>delay showing and hiding the popover (ms) - does not apply to manual trigger type</p>
-             <p>If a number is supplied, delay is applied to both hide/show</p>
-             <p>Object structure is: <code>delay: { show: 500, hide: 100 }</code></p>
-            </td>
-          </tr>
-          <tr>
-            <td>container</td>
-            <td>string | false</td>
-            <td>false</td>
-            <td>
-             <p>Appends the popover to a specific element. Example: <code>container: 'body'</code>. This option is particularly useful in that it allows you to position the popover in the flow of the document near the triggering element - which will prevent the popover from floating away from the triggering element during a window resize.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div><!-- /.table-responsive -->
-    <div class="bs-callout bs-callout-info">
-      <h4>Data attributes for individual popovers</h4>
-      <p>Options for individual popovers can alternatively be specified through the use of data attributes, as explained above.</p>
-    </div>
-
-    <h3>Markup</h3>
-    <p>For performance reasons, the Tooltip and Popover data-apis are opt in. If you would like to use them just specify a selector option.</p>
-
-    <h3>Methods</h3>
-    <h4>$().popover(options)</h4>
-    <p>Initializes popovers for an element collection.</p>
-
-    <h4>.popover('show')</h4>
-    <p>Reveals an elements popover.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.popover('hide')</h4>
-    <p>Hides an elements popover.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span><span class="s1">&#39;hide&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.popover('toggle')</h4>
-    <p>Toggles an elements popover.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span><span class="s1">&#39;toggle&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-    <h4>.popover('destroy')</h4>
-    <p>Hides and destroys an element's popover.</p>
-    <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">)</span>
-</code></pre></div>
-    <h3>Events</h3>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <thead>
-         <tr>
-           <th style="width: 150px;">Event Type</th>
-           <th>Description</th>
-         </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td>show.bs.popover</td>
-           <td>This event fires immediately when the <code>show</code> instance method is called.</td>
-         </tr>
-         <tr>
-           <td>shown.bs.popover</td>
-           <td>This event is fired when the popover has been made visible to the user (will wait for CSS transitions to complete).</td>
-         </tr>
-         <tr>
-           <td>hide.bs.popover</td>
-           <td>This event is fired immediately when the <code>hide</code> instance method has been called.</td>
-         </tr>
-         <tr>
-           <td>hidden.bs.popover</td>
-           <td>This event is fired when the popover has finished being hidden from the user (will wait for CSS transitions to complete).</td>
-         </tr>
-        </tbody>
-      </table>
-    </div><!-- /.table-responsive -->
-<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#myPopover&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hidden.bs.popover&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="c1">// do something…</span>
-<span class="p">})</span>
-</code></pre></div>
-  </div>
 
   <!-- Alert
   ================================================== -->
@@ -1361,7 +937,7 @@
     <h2 id="carousel-examples">Examples</h2>
     <p>The slideshow below shows a generic plugin and component for cycling through elements like a carousel.</p>
     <div class="bs-example">
-      <div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
         <ol class="carousel-indicators">
           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
           <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -1369,22 +945,23 @@
         </ol>
         <div class="carousel-inner">
           <div class="item active">
-            <img src="data:image/png;base64," data-src="holder.js/900x500/auto/#777:#555/text:First slide" alt="First slide">
+            <img data-src="holder.js/900x500/auto/#777:#555/text:First slide" alt="First slide">
           </div>
           <div class="item">
-            <img src="data:image/png;base64," data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide">
+            <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide">
           </div>
           <div class="item">
-            <img src="data:image/png;base64," data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide">
+            <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide">
           </div>
         </div>
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
-      </div>
+      </div>  <!-- /carousel -->
+
     </div><!-- /example -->
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;carousel-example-generic&quot;</span> <span class="na">class=</span><span class="s">&quot;carousel slide&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- Indicators --&gt;</span>
@@ -1422,43 +999,44 @@
     <h3>Optional captions</h3>
     <p>Add captions to your slides easily with the <code>.carousel-caption</code> element within any <code>.item</code>. Place just about any optional HTML within there and it will be automatically aligned and formatted.</p>
     <div class="bs-example">
-      <div id="carousel-example-captions" class="carousel slide bs-docs-carousel-example">
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-captions" data-slide-to="1"></li>
-          <li data-target="#carousel-example-captions" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="item active">
-            <img data-src="holder.js/900x500/auto/#777:#777" src="data:image/png;base64," alt="First slide image">
-            <div class="carousel-caption">
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      <div id="carousel-example-captions" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-captions" data-slide-to="1"></li>
+            <li data-target="#carousel-example-captions" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="item active">
+              <img data-src="holder.js/900x500/auto/#777:#777" alt="First slide image">
+              <div class="carousel-caption">
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </div>
+            </div>
+            <div class="item">
+              <img data-src="holder.js/900x500/auto/#666:#666" alt="Second slide image">
+              <div class="carousel-caption">
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <div class="item">
+              <img data-src="holder.js/900x500/auto/#555:#5555" alt="Third slide image">
+              <div class="carousel-caption">
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </div>
             </div>
           </div>
-          <div class="item">
-            <img data-src="holder.js/900x500/auto/#666:#666" src="data:image/png;base64," alt="Second slide image">
-            <div class="carousel-caption">
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-          <div class="item">
-            <img data-src="holder.js/900x500/auto/#555:#5555" src="data:image/png;base64," alt="Third slide image">
-            <div class="carousel-caption">
-              <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </div>
-          </div>
-        </div>
-        <a class="left carousel-control" href="#carousel-example-captions" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-captions" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </div>
+          <a class="left carousel-control" href="#carousel-example-captions" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-captions" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+      </div> <!-- /carousel -->
     </div><!-- /example -->
+
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;item active&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;...&quot;</span> <span class="na">alt=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;carousel-caption&quot;</span><span class="nt">&gt;</span>
