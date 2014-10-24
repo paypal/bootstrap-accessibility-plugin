@@ -42,6 +42,55 @@
     el.removeAttr( attr )
    }
   }
+
+// selectors  Courtesy: https://github.com/jquery/jquery-ui/blob/master/ui/core.js
+  var focusable = function ( element, isTabIndexNotNaN ) {
+    var map, mapName, img,
+    nodeName = element.nodeName.toLowerCase();
+    if ( "area" === nodeName ) {
+    map = element.parentNode;
+    mapName = map.name;
+    if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+    return false;
+    }
+    img = $( "img[usemap='#" + mapName + "']" )[ 0 ];
+    return !!img && visible( img );
+    }
+    return ( /input|select|textarea|button|object/.test( nodeName ) ?
+    !element.disabled :
+    "a" === nodeName ?
+    element.href || isTabIndexNotNaN :isTabIndexNotNaN) && visible( element ); // the element and all of its ancestors must be visible  
+  }
+  var visible = function ( element ) {
+    return $.expr.filters.visible( element ) &&
+      !$( element ).parents().addBack().filter(function() {
+        return $.css( this, "visibility" ) === "hidden";
+      }).length;
+  }
+
+  $.extend( $.expr[ ":" ], {
+    data: $.expr.createPseudo ?
+      $.expr.createPseudo(function( dataName ) {
+        return function( elem ) {
+          return !!$.data( elem, dataName );
+        };
+      }) :
+      // support: jQuery <1.8
+      function( elem, i, match ) {
+        return !!$.data( elem, match[ 3 ] );
+      },
+
+    focusable: function( element ) {
+      return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
+    },
+
+    tabbable: function( element ) {
+      var tabIndex = $.attr( element, "tabindex" ),
+        isTabIndexNaN = isNaN( tabIndex );
+      return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+    }
+  });
+
 // Alert Extension
 // ===============================
 
@@ -57,7 +106,22 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
        modalOpener.focus()
+       $(document).off('keydown.bs.modal')
     }
+
+    var modalfocus =   $.fn.modal.Constructor.prototype.enforceFocus
+    $.fn.modal.Constructor.prototype.enforceFocus = function(){
+      var focEls = this.$element.find(":tabbable")
+        , lastEl = focEls[focEls.length-1]
+      $(document).on('keydown.bs.modal', $.proxy(function (ev) {
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
+          lastEl.focus()
+          ev.preventDefault();
+        }
+      }, this))
+
+      modalfocus.apply(this, arguments)
+    }    
   // DROPDOWN Extension
   // ===============================
   
