@@ -17,10 +17,10 @@
           if(collparent){
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
             if(collpanel.hasClass('in')){
-              colltab.attr({ 'aria-controls': colltab.attr('href').substr(1), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
+              colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
             }else{
-              colltab.attr({'aria-controls' : colltab.attr('href').substr(1), 'tabindex':'-1' })
+              colltab.attr({'aria-controls' : collpanel.attr('id'), 'tabindex':'-1' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
             }
           }

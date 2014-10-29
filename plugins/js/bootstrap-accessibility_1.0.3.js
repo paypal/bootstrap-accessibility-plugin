@@ -42,60 +42,50 @@
     el.removeAttr( attr )
    }
   }
-
-// selectors  Courtesy: https://github.com/jquery/jquery-ui/blob/master/ui/core.js
-  var focusable = function ( element, isTabIndexNotNaN ) {
-    var map, mapName, img,
-    nodeName = element.nodeName.toLowerCase();
-    if ( "area" === nodeName ) {
-    map = element.parentNode;
-    mapName = map.name;
-    if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
-    return false;
-    }
-    img = $( "img[usemap='#" + mapName + "']" )[ 0 ];
-    return !!img && visible( img );
-    }
-    return ( /input|select|textarea|button|object/.test( nodeName ) ?
-    !element.disabled :
-    "a" === nodeName ?
-    element.href || isTabIndexNotNaN :isTabIndexNotNaN) && visible( element ); // the element and all of its ancestors must be visible  
-  }
-  var visible = function ( element ) {
-    return $.expr.filters.visible( element ) &&
-      !$( element ).parents().addBack().filter(function() {
-        return $.css( this, "visibility" ) === "hidden";
-      }).length;
-  }
-
-  $.extend( $.expr[ ":" ], {
-    data: $.expr.createPseudo ?
-      $.expr.createPseudo(function( dataName ) {
-        return function( elem ) {
-          return !!$.data( elem, dataName );
-        };
-      }) :
-      // support: jQuery <1.8
-      function( elem, i, match ) {
-        return !!$.data( elem, match[ 3 ] );
-      },
-
-    focusable: function( element ) {
-      return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
-    },
-
-    tabbable: function( element ) {
-      var tabIndex = $.attr( element, "tabindex" ),
-        isTabIndexNaN = isNaN( tabIndex );
-      return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
-    }
-  });
-
 // Alert Extension
 // ===============================
 
 $('.alert').attr('role', 'alert')
 $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
+
+  // TOOLTIP Extension
+  // ===============================
+  
+    var showTooltip =    $.fn.tooltip.Constructor.prototype.show
+        , hideTooltip =    $.fn.tooltip.Constructor.prototype.hide
+
+    $.fn.tooltip.Constructor.prototype.show = function () {
+        showTooltip.apply(this, arguments)
+        var $tip = this.tip()
+            , tooltipID = $tip.attr('id') || uniqueId('ui-tooltip')
+        $tip.attr({'role':'tooltip','id' : tooltipID})
+        this.$element.attr('aria-describedby', tooltipID)
+    }
+
+    $.fn.tooltip.Constructor.prototype.hide = function () {
+        hideTooltip.apply(this, arguments)
+        removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
+        return this
+    }
+  // Popover Extension
+  // ===============================
+  
+  var showPopover =   $.fn.popover.Constructor.prototype.setContent
+      , hidePopover =   $.fn.popover.Constructor.prototype.hide
+
+    $.fn.popover.Constructor.prototype.setContent = function(){
+      showPopover.apply(this, arguments)
+      var $tip = this.tip()
+        , tooltipID = $tip.attr('id') || uniqueId('ui-tooltip')
+      $tip.attr({'role':'alert','id' : tooltipID})
+      this.$element.attr('aria-describedby', tooltipID)
+      this.$element.focus()
+    }
+    $.fn.popover.Constructor.prototype.hide =  function(){
+        hidePopover.apply(this, arguments)
+        removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
+        return this
+    }
 
   // Modal Extension
   // ===============================
@@ -105,23 +95,9 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
+       console.log('modalOpener' , modalOpener)
        modalOpener.focus()
-       $(document).off('keydown.bs.modal')
     }
-
-    var modalfocus =   $.fn.modal.Constructor.prototype.enforceFocus
-    $.fn.modal.Constructor.prototype.enforceFocus = function(){
-      var focEls = this.$element.find(":tabbable")
-        , lastEl = focEls[focEls.length-1]
-      $(document).on('keydown.bs.modal', $.proxy(function (ev) {
-        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
-          lastEl.focus()
-          ev.preventDefault();
-        }
-      }, this))
-
-      modalfocus.apply(this, arguments)
-    }    
   // DROPDOWN Extension
   // ===============================
   
@@ -139,13 +115,11 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       $par = $(this)
       var $toggle = $par.find(toggle)
       $toggle.attr('aria-expanded','true')
-      $toggle.on('keydown.bs.modal', $.proxy(function (ev) {
-        setTimeout(function(){
-              firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
-              try{ firstItem.focus()} catch(ex) {}
-        }, focusDelay)
-      }, this)) 
 
+      setTimeout(function(){
+            firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
+            try{ firstItem.focus()} catch(ex) {}
+      }, focusDelay)
     })
 
     $(toggle).parent().on('hidden.bs.dropdown',function(e){
@@ -154,10 +128,20 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       $toggle.attr('aria-expanded','false')
     })
 
+    //Adding Space Key Behaviour, opens on spacebar
+    $.fn.dropdown.Constructor.prototype.keydown = function (e) {
+      var  $par
+        , firstItem
+      if (!/(32)/.test(e.keyCode)) return
+        $par = $(this).parent()
+        $(this).trigger ("click")
+        e.preventDefault() && e.stopPropagation()
+    }
+
     $(document)
       .on('focusout.dropdown.data-api', '.dropdown-menu', function(e){
         var $this = $(this)
-          , that = this
+                    , that = this
         setTimeout(function() {
          if(!$.contains(that, document.activeElement)){
           $this.parent().removeClass('open')
@@ -258,10 +242,10 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
           if(collparent){
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
             if(collpanel.hasClass('in')){
-              colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
+              colltab.attr({ 'aria-controls': colltab.attr('href').substr(1), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
             }else{
-              colltab.attr({'aria-controls' : collpanel.attr('id'), 'tabindex':'-1' })
+              colltab.attr({'aria-controls' : colltab.attr('href').substr(1), 'tabindex':'-1' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
             }
           }
@@ -377,18 +361,16 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
         slideCarousel.apply(this, arguments)
 
       $active
-        .one('bsTransitionEnd', function () {
-          $active.attr({'aria-selected':false, 'tabIndex': '-1'})
-          $next.attr({'aria-selected':true, 'tabIndex': '0'})
-            //.focus()
+        .one($.support.transition.end, function () {
+        $active.attr({'aria-selected':false, 'tabIndex': '-1'})
+        $next.attr({'aria-selected':true, 'tabIndex': '0'})
+        //.focus()
        })
       }
 
-     var $this;
-     $.fn.carousel.Constructor.prototype.keydown = function (e) {
-     $this = $this || $(this)
-     if(this instanceof Node) $this = $(this)
-     var $ul = $this.closest('div[role=listbox]')
+    $.fn.carousel.Constructor.prototype.keydown = function (e) {
+     var $this = $(this)
+      , $ul = $this.closest('div[role=listbox]')
       , $items = $ul.find('[role=option]')
       , $parent = $ul.parent()
       , k = e.which || e.keyCode
@@ -396,31 +378,23 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       , i
 
       if (!/(37|38|39|40)/.test(k)) return
+
       index = $items.index($items.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
-        
+        $parent.carousel('prev')
         index--
         if(index < 0) index = $items.length -1
-        else  {
-          $parent.carousel('prev')
-          setTimeout(function () {
-            $items[index].focus()
-            // $this.prev().focus()
-          }, 150)      
-        }  
+        else  $this.prev().focus()
 
       }
       if (k == 39 || k == 40) {                          // Down
+        $parent.carousel('next')
         index++
-        if(index == $items.length) {
-          index = 0
-        }  
+        if(index == $items.length) index = 0
         else  {
-          $parent.carousel('next')
-          setTimeout(function () {
-            $items[index].focus()
-            // $this.next().focus()
-          }, 150)            
+          $this.one($.support.transition.end, function () {
+            $this.next().focus()
+          })
         }
 
       }
@@ -429,6 +403,5 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
       e.stopPropagation()
     }
     $(document).on('keydown.carousel.data-api', 'div[role=option]', $.fn.carousel.Constructor.prototype.keydown)
-
 
  })(jQuery);
