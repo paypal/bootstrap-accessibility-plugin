@@ -28,9 +28,6 @@ module.exports = function(grunt) {
 			files: {
 				src: [
 					'src/js/functions.js',
-					'src/js/alert.js',
-					'src/js/tooltip.js',
-					'src/js/popover.js',
 					'src/js/modal.js',
 					'src/js/dropdown.js',
 					'src/js/tab.js',
@@ -50,9 +47,6 @@ module.exports = function(grunt) {
 			bootstrap: {
 				src: [
 					'src/js/functions.js',
-					'src/js/alert.js',
-					'src/js/tooltip.js',
-					'src/js/popover.js',
 					'src/js/modal.js',
 					'src/js/dropdown.js',
 					'src/js/tab.js',
