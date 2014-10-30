@@ -42,6 +42,7 @@
     el.removeAttr( attr )
    }
   }
+<<<<<<< HEAD
 
 // selectors  Courtesy: https://github.com/jquery/jquery-ui/blob/master/ui/core.js
   var focusable = function ( element, isTabIndexNotNaN ) {
@@ -91,6 +92,14 @@
     }
   });
 
+// Alert Extension
+// ===============================
+
+$('.alert').attr('role', 'alert')
+$('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>')
+
+=======
+>>>>>>> 282c203939680bc8b1aa6d29f1141664fa9fcfa8
   // Modal Extension
   // ===============================
 
