@@ -28,7 +28,6 @@ module.exports = function(grunt) {
 			files: {
 				src: [
 					'src/js/functions.js',
-					'src/js/alert.js',
 					'src/js/modal.js',
 					'src/js/dropdown.js',
 					'src/js/tab.js',
@@ -48,7 +47,6 @@ module.exports = function(grunt) {
 			bootstrap: {
 				src: [
 					'src/js/functions.js',
-					'src/js/alert.js',
 					'src/js/modal.js',
 					'src/js/dropdown.js',
 					'src/js/tab.js',
@@ -67,7 +65,8 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js'
+					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js',
+					'plugins/js/bootstrap-accessibility_1.0.3.min.js': 'plugins/js/bootstrap-accessibility_1.0.3.js'
 				}
 			}
 		},
