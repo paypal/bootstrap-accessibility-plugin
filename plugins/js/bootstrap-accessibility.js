@@ -167,9 +167,11 @@
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
-    $tablist.attr('role', 'tablist')
-    $lis.attr('role', 'presentation')
-    $tabs.attr('role', 'tab')
+    if($tabs){
+      $tablist.attr('role', 'tablist')
+      $lis.attr('role', 'presentation')
+      $tabs.attr('role', 'tab')
+    }
 
     $tabs.each(function( index ) {
       var tabpanel = $($(this).attr('href'))
@@ -237,8 +239,7 @@
   // Collapse Extension
   // ===============================
 
-     var $colltabs =  $('[data-toggle="collapse"]')
-      $colltabs.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
+     var $colltabs =  $('[data-toggle="collapse"]')      
       $colltabs.each(function( index ) {
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
@@ -246,11 +247,13 @@
         , collparent = parent && $(parent)
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
 
-        $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
-
           colltab.attr('id', collid)
+
           if(collparent){
+            colltab.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
+            $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
+
             if(collpanel.hasClass('in')){
               colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })

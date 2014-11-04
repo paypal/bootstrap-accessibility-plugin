@@ -5,9 +5,11 @@
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
-    $tablist.attr('role', 'tablist')
-    $lis.attr('role', 'presentation')
-    $tabs.attr('role', 'tab')
+    if($tabs){
+      $tablist.attr('role', 'tablist')
+      $lis.attr('role', 'presentation')
+      $tabs.attr('role', 'tab')
+    }
 
     $tabs.each(function( index ) {
       var tabpanel = $($(this).attr('href'))
