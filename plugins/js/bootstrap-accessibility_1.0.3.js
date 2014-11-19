@@ -42,6 +42,55 @@
     el.removeAttr( attr )
    }
   }
+  // selectors  Courtesy: https://github.com/jquery/jquery-ui/blob/master/ui/core.js
+  var focusable = function ( element, isTabIndexNotNaN ) {
+    var map, mapName, img,
+    nodeName = element.nodeName.toLowerCase();
+    if ( "area" === nodeName ) {
+    map = element.parentNode;
+    mapName = map.name;
+    if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+    return false;
+    }
+    img = $( "img[usemap='#" + mapName + "']" )[ 0 ];
+    return !!img && visible( img );
+    }
+    return ( /input|select|textarea|button|object/.test( nodeName ) ?
+    !element.disabled :
+    "a" === nodeName ?
+    element.href || isTabIndexNotNaN :isTabIndexNotNaN) && visible( element ); // the element and all of its ancestors must be visible  
+  }
+  var visible = function ( element ) {
+    return $.expr.filters.visible( element ) &&
+      !$( element ).parents().addBack().filter(function() {
+        return $.css( this, "visibility" ) === "hidden";
+      }).length;
+  }
+
+  $.extend( $.expr[ ":" ], {
+    data: $.expr.createPseudo ?
+      $.expr.createPseudo(function( dataName ) {
+        return function( elem ) {
+          return !!$.data( elem, dataName );
+        };
+      }) :
+      // support: jQuery <1.8
+      function( elem, i, match ) {
+        return !!$.data( elem, match[ 3 ] );
+      },
+
+    focusable: function( element ) {
+      return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
+    },
+
+    tabbable: function( element ) {
+      var tabIndex = $.attr( element, "tabindex" ),
+        isTabIndexNaN = isNaN( tabIndex );
+      return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+    }
+  });
+
+
 // Alert Extension
 // ===============================
 
@@ -67,6 +116,7 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
         removeMultiValAttributes(this.$element, 'aria-describedby', this.tip().attr('id'))
         return this
     }
+
   // Popover Extension
   // ===============================
   
@@ -95,9 +145,23 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
        modalhide.apply(this, arguments)
-       console.log('modalOpener' , modalOpener)
        modalOpener.focus()
+       $(document).off('keydown.bs.modal')       
     }
+    var modalfocus =   $.fn.modal.Constructor.prototype.enforceFocus
+    $.fn.modal.Constructor.prototype.enforceFocus = function(){
+      var focEls = this.$element.find(":tabbable")
+        , lastEl = focEls[focEls.length-1]
+      $(document).on('keydown.bs.modal', $.proxy(function (ev) {
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
+          lastEl.focus()
+          ev.preventDefault();
+        }
+      }, this))
+
+      modalfocus.apply(this, arguments)
+    }  
+    
   // DROPDOWN Extension
   // ===============================
   
@@ -157,9 +221,11 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
-    $tablist.attr('role', 'tablist')
-    $lis.attr('role', 'presentation')
-    $tabs.attr('role', 'tab')
+    if($tabs){
+      $tablist.attr('role', 'tablist')
+      $lis.attr('role', 'presentation')
+      $tabs.attr('role', 'tab')
+    }
 
     $tabs.each(function( index ) {
       var tabpanel = $($(this).attr('href'))
@@ -228,7 +294,6 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
   // ===============================
 
      var $colltabs =  $('[data-toggle="collapse"]')
-      $colltabs.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
       $colltabs.each(function( index ) {
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
@@ -236,16 +301,18 @@ $('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span
         , collparent = parent && $(parent)
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
 
-        $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
-
           colltab.attr('id', collid)
+          
           if(collparent){
+            colltab.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
+            $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
+
             if(collpanel.hasClass('in')){
-              colltab.attr({ 'aria-controls': colltab.attr('href').substr(1), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
+              colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
             }else{
-              colltab.attr({'aria-controls' : colltab.attr('href').substr(1), 'tabindex':'-1' })
+              colltab.attr({'aria-controls' : collpanel.attr('id'), 'tabindex':'-1' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
             }
           }
