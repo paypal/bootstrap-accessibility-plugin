@@ -42,7 +42,7 @@ If you use Bootstrap library (version 3.x) on your website, your pages will now 
 - Carousel
 
 ## Plugin Live Demo
-Feel free to play with the [live demo](demo.html) of the components listed above and the Bootstrap Accessibility Plugin in action. Seeing how "accessified" widgets work in this demo will help you verify whether the plugin is installed correctly on your website.
+Feel free to play with the [live demo](https://paypal.github.io/bootstrap-accessibility-plugin/demo.html) of the components listed above and the Bootstrap Accessibility Plugin in action. Seeing how "accessified" widgets work in this demo will help you verify whether the plugin is installed correctly on your website.
 
 ## Details
 
