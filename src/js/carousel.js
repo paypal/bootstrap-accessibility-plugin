@@ -7,7 +7,6 @@
           , next        = $this.find('[data-slide="next"]')
           , $tablist     = $this.find('.carousel-indicators')
           , $tabs        = $this.find('.carousel-indicators li')
-          , $tab
           , $tabpanels  = $this.find('.item')
           , $tabpanel
           , i
@@ -17,8 +16,9 @@
         
         $tabs.focus(function() {
           $this.carousel('pause')
-        });
+        })
 
+        
         console.log('tabpanels: ' + $tabpanels + " (" + $tabpanels.length + ")")
         for (i = 0; i < $tabpanels.length; i++) {
           $tabpanel = $tabpanels[i]
@@ -34,13 +34,23 @@
           $this.attr('aria-labelledby', id);
           $this.prepend('<h2 id="' + id + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides</h2>')
         }  
+
+        $tabs.focus(function(event) {
+          $(this).addClass('focus');
+        })
+
+        $tabs.blur(function(event) {
+          $(this).removeClass('focus')
+        })
+
                 
         for (i = 0; i < $tabs.length; i++) {
           var j = i + 1;
-          $tab = $tabs[i]
-          $tab.setAttribute('role', 'tab')
-          $tab.setAttribute('id', 'tab-' + index + '-' + i)
-          $tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
+          var tab = $tabs[i]
+          
+          tab.setAttribute('role', 'tab')
+          tab.setAttribute('id', 'tab-' + index + '-' + i)
+          tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
           
           var caption = $this.find('#tabpanel-' + index + '-' + i).find('h3').text()
           
@@ -49,7 +59,7 @@
           tabName.innerHTML='Slide ' + j
           if (caption) tabName.innerHTML += ": " +  caption
           
-          $tab.appendChild(tabName)
+          tab.appendChild(tabName)
         }
           
 
@@ -84,25 +94,21 @@
           , $next = next || $active[type]()
           , $tab
 
-//        console.log("type: " + type + " active: " + $active.attr('id') + " next: " + $next.attr('id'))
 
         $tab = this.$element.find('li[aria-controls=' + $active.attr('id') + ']')
         if ($tab) {
           $tab.attr({'aria-selected':false, 'tabIndex': '-1'})
-//          console.log("active: " + $active.attr('id') + " tab: " + $tab.attr('aria-controls'))
         }  
 
         $tab = this.$element.find('li[aria-controls="' + $next.attr('id') + '"]')
         if ($tab) {
           $tab.attr({'aria-selected':true, 'tabIndex': '0'})
-//          console.log("next: " + $next.attr('id') + " tab: " + $tab.attr('aria-controls'))
         }  
         
         slideCarousel.apply(this, arguments)
 
       $active
         .one('bsTransitionEnd', function () {
-//          console.log("active: " + $active.attr('id') + " next: " + $next.attr('id'))
           var $tab
           
           $tab = $element.find('li[aria-controls="' + $active.attr('id') + '"]')
@@ -123,11 +129,11 @@
      $this = $this || $(this)
      if(this instanceof Node) $this = $(this)
      
-     function selectTab(dir) {
-       if (index >= $tabs.length) return
+     function selectTab(index) {
+       if (index >= $tabs.length) return 
        if (index < 0) return
 
-       $carousel.carousel(dir)
+       $carousel.carousel(index)
        setTimeout(function () {
             $tabs[index].focus()
             // $this.prev().focus()
@@ -140,19 +146,19 @@
       , index
 
       console.log("carousel  : " + $carousel + " (" + $carousel[0].tagName + ")")
-      console.log("tabs      : " + $tabs + " (" + $tabs.length + ")")
+      console.log("tabs      : " + $tabs     + " (" + $tabs.length + ")")
 
       if (!/(37|38|39|40)/.test(k)) return
       
       index = $tabs.index($tabs.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
         index--
-        selectTab('prev');
+        selectTab(index);
       }
       
       if (k == 39 || k == 40) {                          // Down
         index++
-        selectTab('next');
+        selectTab(index);
       }
 
       e.preventDefault()

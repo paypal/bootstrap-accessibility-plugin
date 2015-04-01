@@ -1,24 +1,11 @@
-.carousel-inner {
-  > .item {
-    position: absolute;
-    top: -999999em; 
-    display: block;
-    @include single-transition(0.6s, ease-in-out, left);
-  }
+.carousel-indicators li,
+.carousel-indicators li.active {
+  height: 18px;
+  width: 18px;
+  border-width: 2px;
+}
 
-  > .active {
-    top: 0;
-  }
-  > .active,
-  > .next,
-  > .prev {
-    position: relative
-  }
-
-  > .next,
-  > .prev {;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+.carousel-indicators li.active.focus {
+  background-color: #202020;
+  border-width: 5px;
 }
