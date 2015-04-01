@@ -20,15 +20,12 @@
         })
 
         
-        console.log('tabpanels: ' + $tabpanels + " (" + $tabpanels.length + ")")
         for (i = 0; i < $tabpanels.length; i++) {
           $tabpanel = $tabpanels[i]
           $tabpanel.setAttribute('role', 'tabpanel')
           $tabpanel.setAttribute('id', 'tabpanel-' + index + '-' + i)
           $tabpanel.setAttribute('aria-labelledby', 'tab-' + index + '-' + i)
         }
-
-        console.log("role: " + $this.attr('role') + " aria-label: " + $this.attr('aria-label'))
 
         if (typeof $this.attr('role') !== 'string') {
           $this.attr('role', 'complementary');
@@ -54,7 +51,15 @@
           tab.setAttribute('id', 'tab-' + index + '-' + i)
           tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
           
-          var caption = $this.find('#tabpanel-' + index + '-' + i).find('h3').text()
+          var caption = $this.find('#tabpanel-' + index + '-' + i).find('h1').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h2').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h3').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h4').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h5').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h6').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = "no title";
+          
+          console.log("CAPTION: " + caption )
           
           var tabName = document.createElement('span')
           tabName.setAttribute('class', 'sr-only')
