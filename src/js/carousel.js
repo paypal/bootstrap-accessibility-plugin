@@ -10,7 +10,8 @@
           , $tabpanels  = $this.find('.item')
           , $tabpanel
           , i
-          , id = 'id_carousel'
+          , id_title = 'id_title'
+          , id_desc  = 'id_desc'
 
         $tablist.attr('role', 'tablist')
         
@@ -31,8 +32,9 @@
 
         if (typeof $this.attr('role') !== 'string') {
           $this.attr('role', 'complementary');
-          $this.attr('aria-labelledby', id);
-          $this.prepend('<h2 id="' + id + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides</h2>')
+          $this.attr('aria-labelledby', id_title + " " + id_desc);
+          $this.prepend('<h2 id="' + id_title + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
+          $this.prepend('<p id="' + id_desc + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
         }  
 
         $tabs.focus(function(event) {
@@ -124,8 +126,6 @@
      var $this;
      $.fn.carousel.Constructor.prototype.keydown = function (e) {
      
-     console.log("keydown: " + e.keyCode + " target: " + e.target.getAttribute('role'))
-     
      $this = $this || $(this)
      if(this instanceof Node) $this = $(this)
      
@@ -144,9 +144,6 @@
       , $tabs      = $carousel.find('[role=tab]')
       , k = e.which || e.keyCode
       , index
-
-      console.log("carousel  : " + $carousel + " (" + $carousel[0].tagName + ")")
-      console.log("tabs      : " + $tabs     + " (" + $tabs.length + ")")
 
       if (!/(37|38|39|40)/.test(k)) return
       
