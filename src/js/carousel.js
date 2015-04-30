@@ -70,19 +70,10 @@
         }
           
 
-        var spanPrev = document.createElement('span')
-        spanPrev.setAttribute('class', 'sr-only')
-        spanPrev.innerHTML='Slide'
-
-        var spanNext = document.createElement('span')
-        spanNext.setAttribute('class', 'sr-only')
-        spanNext.innerHTML='Slide'
-
         prev.attr('role', 'button')
+        prev.attr('aria-label', 'Previous Slide')
         next.attr('role', 'button')
-
-        prev.append(spanPrev)
-        next.append(spanNext)
+        next.attr('aria-label', 'Next Slide')
 
         $tabs.each(function () {
           var item = $(this)
@@ -97,9 +88,16 @@
       var slideCarousel = $.fn.carousel.Constructor.prototype.slide
       $.fn.carousel.Constructor.prototype.slide = function (type, next) {
         var $element = this.$element
-          , $active = $element.find('[role=tabpanel].active')
-          , $next = next || $active[type]()
+          , $active  = $element.find('[role=tabpanel].active')
+          , $next    = next || $active[type]()
           , $tab
+          , $tab_count = $element.find('[role=tabpanel]').size()
+          , $prev_side = $element.find('[data-slide="prev"]')
+          , $next_side = $element.find('[data-slide="next"]')
+          , $index = 1
+          , $prev_index = $tab_count
+          , $next_index = 2
+          , $id
 
 
         $tab = this.$element.find('li[aria-controls=' + $active.attr('id') + ']')
@@ -111,12 +109,39 @@
         if ($tab) {
           $tab.attr({'aria-selected':true, 'tabIndex': '0'})
         }  
+
+//        console.log("[slide] =================")
+//        console.log("[slide]      active: " + $active.attr('id'))
+//        console.log("[slide]        next: " + $next)
+        
+        if ($next && $next.attr('id')) {
+          $id = $next.attr('id')
+          $index = $id.lastIndexOf("-")
+          if ($index >= 0) $index = parseInt($id.substring($index+1), 10) + 1
+          
+          $prev_index = $index - 1
+          if ($prev_index < 1) $prev_index = $tab_count
+          
+          $next_index = $index + 1
+          if ($next_index > $tab_count) $next_index = 1
+        }  
+        
+//        console.log("[slide]   tab_count: " + $tab_count)
+//        console.log("[slide]       index: " + $index)
+//        console.log("[slide]  prev_index: " + $prev_index)
+//        console.log("[slide]  next_index: " + $next_index)
+        
+        
+        $prev_side.attr('aria-label', 'Show slide ' + $prev_index + ' of ' + $tab_count)
+        $next_side.attr('aria-label', 'Show slide ' + $next_index + ' of ' + $tab_count)
+
         
         slideCarousel.apply(this, arguments)
 
       $active
         .one('bsTransitionEnd', function () {
           var $tab
+          
           
           $tab = $element.find('li[aria-controls="' + $active.attr('id') + '"]')
           if ($tab) $tab.attr({'aria-selected':false, 'tabIndex': '-1'})
@@ -167,3 +192,4 @@
       e.stopPropagation()
     }
     $(document).on('keydown.carousel.data-api', 'li[role=tab]', $.fn.carousel.Constructor.prototype.keydown)
+
