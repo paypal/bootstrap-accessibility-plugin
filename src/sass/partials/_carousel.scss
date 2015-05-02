@@ -3,9 +3,10 @@
   height: 18px;
   width: 18px;
   border-width: 2px;
+  position: relative;
 }
 
+a.carousel-control:focus,
 .carousel-indicators li.active.focus {
-  background-color: #202020;
-  border-width: 5px;
+  outline: yellow solid 2px;
 }

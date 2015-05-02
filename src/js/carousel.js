@@ -108,12 +108,9 @@
         $tab = this.$element.find('li[aria-controls="' + $next.attr('id') + '"]')
         if ($tab) {
           $tab.attr({'aria-selected':true, 'tabIndex': '0'})
+          $tab.focus()
         }  
 
-//        console.log("[slide] =================")
-//        console.log("[slide]      active: " + $active.attr('id'))
-//        console.log("[slide]        next: " + $next)
-        
         if ($next && $next.attr('id')) {
           $id = $next.attr('id')
           $index = $id.lastIndexOf("-")
@@ -126,14 +123,9 @@
           if ($next_index > $tab_count) $next_index = 1
         }  
         
-//        console.log("[slide]   tab_count: " + $tab_count)
-//        console.log("[slide]       index: " + $index)
-//        console.log("[slide]  prev_index: " + $prev_index)
-//        console.log("[slide]  next_index: " + $next_index)
         
-        
-        $prev_side.attr('aria-label', 'Show slide ' + $prev_index + ' of ' + $tab_count)
-        $next_side.attr('aria-label', 'Show slide ' + $next_index + ' of ' + $tab_count)
+        $prev_side.attr('aria-label', 'Go to slide ' + $prev_index + ' of ' + $tab_count)
+        $next_side.attr('aria-label', 'Go to slide ' + $next_index + ' of ' + $tab_count)
 
         
         slideCarousel.apply(this, arguments)
