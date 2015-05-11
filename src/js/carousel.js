@@ -33,7 +33,7 @@
           $this.attr('aria-labelledby', id_title + " " + id_desc);
           $this.prepend('<h2 id="' + id_title + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
           $this.prepend('<p id="' + id_desc + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
-          $this.prepend('<p id="' + id_status + '" role="status" class="sr-only"></p>')
+          $this.prepend('<p id="' + id_status + '" role="status" aria-live="polite" class="sr-only"></p>')
         }  
 
         $tabs.focus(function(event) {
@@ -102,7 +102,7 @@
           , $id
           , $status = $element.find('[role=status]')
 
-        console.log("UPDATE: " + $element.get(0).buttonPressed)
+//        console.log("UPDATE: " + $element.get(0).buttonPressed)
         
         if ($next && $next.attr('id')) {
           $id = $next.attr('id')
@@ -118,7 +118,7 @@
         
         $tab = this.$element.find('li[aria-controls="tabpanel-0-' + $index + '"]')
         if ($element.get(0).buttonPressed) {
-          console.log("UPDATE: " + $tab.text())
+//          console.log("UPDATE: " + $tab.text())
           $status.html($tab.text());
           $element.get(0).buttonPressed = false;
         }  
@@ -163,6 +163,7 @@
       , $tabs      = $carousel.find('[role=tab]')
       , k = e.which || e.keyCode
       , index
+      , $status = $carousel.find('[role=status]')
       
       console.log("KEYBOARD (" + e.keyCode + "): " + $carousel.get(0).usingKeyboard)
 
@@ -170,6 +171,8 @@
         $carousel.get(0).buttonPressed = true
         return
       }
+      
+      $status.html("");
        
       if (!/(37|38|39|40)/.test(k)) return
       
