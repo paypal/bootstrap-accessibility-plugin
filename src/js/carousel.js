@@ -5,13 +5,14 @@
         var $this = $(this)
           , prev        = $this.find('[data-slide="prev"]')
           , next        = $this.find('[data-slide="next"]')
-          , $tablist     = $this.find('.carousel-indicators')
-          , $tabs        = $this.find('.carousel-indicators li')
+          , $tablist    = $this.find('.carousel-indicators')
+          , $tabs       = $this.find('.carousel-indicators li')
           , $tabpanels  = $this.find('.item')
           , $tabpanel
           , i
-          , id_title = 'id_title'
-          , id_desc  = 'id_desc'
+          , id_title  = 'id_title'
+          , id_desc   = 'id_desc'
+          , id_status = 'id_status'
 
         $tablist.attr('role', 'tablist')
         
@@ -32,6 +33,7 @@
           $this.attr('aria-labelledby', id_title + " " + id_desc);
           $this.prepend('<h2 id="' + id_title + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
           $this.prepend('<p id="' + id_desc + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
+          $this.prepend('<p id="' + id_status + '" role="status" class="sr-only"></p>')
         }  
 
         $tabs.focus(function(event) {
@@ -44,32 +46,32 @@
 
                 
         for (i = 0; i < $tabs.length; i++) {
-          var j = i + 1;
           var tab = $tabs[i]
           
           tab.setAttribute('role', 'tab')
           tab.setAttribute('id', 'tab-' + index + '-' + i)
           tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
           
-          var caption = $this.find('#tabpanel-' + index + '-' + i).find('h1').text()
-          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h2').text()
-          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h3').text()
-          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h4').text()
-          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h5').text()
-          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find('#tabpanel-' + index + '-' + i).find('h6').text()
+          var tpId = '#tabpanel-' + index + '-' + i
+          var caption = $this.find(tpId).find('h1').text()
+          
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find(tpId).text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find(tpId).find('h3').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find(tpId).find('h4').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find(tpId).find('h5').text()
+          if ((typeof caption !== 'string') || (caption.length === 0)) caption = $this.find(tpId).find('h6').text()
           if ((typeof caption !== 'string') || (caption.length === 0)) caption = "no title";
           
-          console.log("CAPTION: " + caption )
+//          console.log("CAPTION: " + caption )
           
           var tabName = document.createElement('span')
           tabName.setAttribute('class', 'sr-only')
-          tabName.innerHTML='Slide ' + j
+          tabName.innerHTML='Slide ' + (i+1)
           if (caption) tabName.innerHTML += ": " +  caption
           
           tab.appendChild(tabName)
         }
           
-
         prev.attr('role', 'button')
         prev.attr('aria-label', 'Previous Slide')
         next.attr('role', 'button')
@@ -94,38 +96,35 @@
           , $tab_count = $element.find('[role=tabpanel]').size()
           , $prev_side = $element.find('[data-slide="prev"]')
           , $next_side = $element.find('[data-slide="next"]')
-          , $index = 1
-          , $prev_index = $tab_count
-          , $next_index = 2
+          , $index      = 0
+          , $prev_index = $tab_count -1
+          , $next_index = 1
           , $id
+          , $status = $element.find('[role=status]')
 
-
-        $tab = this.$element.find('li[aria-controls=' + $active.attr('id') + ']')
-        if ($tab) {
-          $tab.attr({'aria-selected':false, 'tabIndex': '-1'})
-        }  
-
-        $tab = this.$element.find('li[aria-controls="' + $next.attr('id') + '"]')
-        if ($tab) {
-          $tab.attr({'aria-selected':true, 'tabIndex': '0'})
-          $tab.focus()
-        }  
-
+        console.log("UPDATE: " + $element.get(0).buttonPressed)
+        
         if ($next && $next.attr('id')) {
           $id = $next.attr('id')
           $index = $id.lastIndexOf("-")
-          if ($index >= 0) $index = parseInt($id.substring($index+1), 10) + 1
+          if ($index >= 0) $index = parseInt($id.substring($index+1), 10)
           
           $prev_index = $index - 1
-          if ($prev_index < 1) $prev_index = $tab_count
+          if ($prev_index < 1) $prev_index = $tab_count - 1
           
           $next_index = $index + 1
-          if ($next_index > $tab_count) $next_index = 1
+          if ($next_index >= $tab_count) $next_index = 0
         }  
         
+        $tab = this.$element.find('li[aria-controls="tabpanel-0-' + $index + '"]')
+        if ($element.get(0).buttonPressed) {
+          console.log("UPDATE: " + $tab.text())
+          $status.html($tab.text());
+          $element.get(0).buttonPressed = false;
+        }  
         
-        $prev_side.attr('aria-label', 'Go to slide ' + $prev_index + ' of ' + $tab_count)
-        $next_side.attr('aria-label', 'Go to slide ' + $next_index + ' of ' + $tab_count)
+        $prev_side.attr('aria-label', 'Show slide ' + ($prev_index+1) + ' of ' + $tab_count)
+        $next_side.attr('aria-label', 'Show silde ' + ($next_index+1) + ' of ' + $tab_count)
 
         
         slideCarousel.apply(this, arguments)
@@ -134,14 +133,12 @@
         .one('bsTransitionEnd', function () {
           var $tab
           
-          
           $tab = $element.find('li[aria-controls="' + $active.attr('id') + '"]')
           if ($tab) $tab.attr({'aria-selected':false, 'tabIndex': '-1'})
 
           $tab = $element.find('li[aria-controls="' + $next.attr('id') + '"]')
           if ($tab) $tab.attr({'aria-selected': true, 'tabIndex': '0'})
           
-            //.focus()
        })
       }
 
@@ -166,7 +163,14 @@
       , $tabs      = $carousel.find('[role=tab]')
       , k = e.which || e.keyCode
       , index
+      
+      console.log("KEYBOARD (" + e.keyCode + "): " + $carousel.get(0).usingKeyboard)
 
+      if (/32|13/.test(k)) {
+        $carousel.get(0).buttonPressed = true
+        return
+      }
+       
       if (!/(37|38|39|40)/.test(k)) return
       
       index = $tabs.index($tabs.filter('.active'))

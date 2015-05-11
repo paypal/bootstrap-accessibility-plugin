@@ -4,9 +4,21 @@
   width: 18px;
   border-width: 2px;
   position: relative;
+  box-shadow: 0px 0px 0px 1px #808080;
+  -moz-boxshadow: 0px 0px 0px 1px #808080;
+  -webkit-boxshadow: 0px 0px 0px 1px #808080;
+}
+
+.carousel-indicators li.active {
+  box-shadow: 0px 0px 0px 2px #000000;
+  -moz-boxshadow: 0px 0px 0px 2px #000000;
+  -webkit-boxshadow: 0px 0px 0px 2px #000000;
 }
 
 a.carousel-control:focus,
 .carousel-indicators li.active.focus {
-  outline: yellow solid 2px;
+  outline: 2px solid yellow;
+  box-shadow: 0px 0px 0px 1px #000000;
+  -moz-boxshadow: 0px 0px 0px 1px #000000;
+  -webkit-boxshadow: 0px 0px 0px 1px #000000;
 }
