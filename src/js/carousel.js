@@ -3,8 +3,8 @@
   
       $('.carousel').each(function (index) {
         var $this = $(this)
-          , prev        = $this.find('[data-slide="prev"]')
-          , next        = $this.find('[data-slide="next"]')
+          , $prev        = $this.find('[data-slide="prev"]')
+          , $next        = $this.find('[data-slide="next"]')
           , $tablist    = $this.find('.carousel-indicators')
           , $tabs       = $this.find('.carousel-indicators li')
           , $tabpanels  = $this.find('.item')
@@ -12,7 +12,6 @@
           , i
           , id_title  = 'id_title'
           , id_desc   = 'id_desc'
-          , id_status = 'id_status'
 
         $tablist.attr('role', 'tablist')
         
@@ -31,9 +30,8 @@
         if (typeof $this.attr('role') !== 'string') {
           $this.attr('role', 'complementary');
           $this.attr('aria-labelledby', id_title + " " + id_desc);
-          $this.prepend('<h2 id="' + id_title + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
-          $this.prepend('<p id="' + id_desc + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
-          $this.prepend('<p id="' + id_status + '" role="status" aria-live="polite" class="sr-only"></p>')
+          $this.prepend('<p  id="' + id_desc   + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
+          $this.prepend('<h2 id="' + id_title  + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
         }  
 
         $tabs.focus(function(event) {
@@ -71,15 +69,31 @@
           
           tab.appendChild(tabName)
         }
-          
-        prev.attr('role', 'button')
-        prev.attr('aria-label', 'Previous Slide')
-        next.attr('role', 'button')
-        next.attr('aria-label', 'Next Slide')
+
+        // Add space bar behavior to prev and next buttons for SR compatibility
+        $prev.attr('aria-label', 'Previous Slide')
+        $prev.keydown(function(e) {
+          var k = e.which || e.keyCode
+          if (/(13|32)/.test(k)) {
+            e.preventDefault()
+            e.stopPropagation()
+            $prev.trigger('click');
+          }
+        });
+        
+        $next.attr('aria-label', 'Next Slide')
+        $next.keydown(function(e) {
+          var k = e.which || e.keyCode
+          if (/(13|32)/.test(k)) {
+            e.preventDefault()
+            e.stopPropagation()           
+            $next.trigger('click');
+          }
+        });
 
         $tabs.each(function () {
           var item = $(this)
-          if(item.hasClass('active')){
+          if(item.hasClass('active')) {
             item.attr({ 'aria-selected': 'true', 'tabindex' : '0' })
           }else{
             item.attr({ 'aria-selected': 'false', 'tabindex' : '-1' })
@@ -100,9 +114,6 @@
           , $prev_index = $tab_count -1
           , $next_index = 1
           , $id
-          , $status = $element.find('[role=status]')
-
-//        console.log("UPDATE: " + $element.get(0).buttonPressed)
         
         if ($next && $next.attr('id')) {
           $id = $next.attr('id')
@@ -115,16 +126,9 @@
           $next_index = $index + 1
           if ($next_index >= $tab_count) $next_index = 0
         }  
-        
-        $tab = this.$element.find('li[aria-controls="tabpanel-0-' + $index + '"]')
-        if ($element.get(0).buttonPressed) {
-//          console.log("UPDATE: " + $tab.text())
-          $status.html($tab.text());
-          $element.get(0).buttonPressed = false;
-        }  
-        
+                
         $prev_side.attr('aria-label', 'Show slide ' + ($prev_index+1) + ' of ' + $tab_count)
-        $next_side.attr('aria-label', 'Show silde ' + ($next_index+1) + ' of ' + $tab_count)
+        $next_side.attr('aria-label', 'Show slide ' + ($next_index+1) + ' of ' + $tab_count)
 
         
         slideCarousel.apply(this, arguments)
@@ -163,16 +167,6 @@
       , $tabs      = $carousel.find('[role=tab]')
       , k = e.which || e.keyCode
       , index
-      , $status = $carousel.find('[role=status]')
-      
-      console.log("KEYBOARD (" + e.keyCode + "): " + $carousel.get(0).usingKeyboard)
-
-      if (/32|13/.test(k)) {
-        $carousel.get(0).buttonPressed = true
-        return
-      }
-      
-      $status.html("");
        
       if (!/(37|38|39|40)/.test(k)) return
       
