@@ -25,12 +25,30 @@
           $tabpanel.setAttribute('role', 'tabpanel')
           $tabpanel.setAttribute('id', 'tabpanel-' + index + '-' + i)
           $tabpanel.setAttribute('aria-labelledby', 'tab-' + index + '-' + i)
+
+          // Support keyboard support for tabpanel navigation from with an tabpanel
+          // PageUp and PageDown
+          $tabpanel.keydown(function(e) {
+            var k = e.which || e.keyCode
+            if (e.ctrlKey && /(34)/.test(k)) {
+              e.preventDefault()
+              e.stopPropagation()           
+              $next.trigger('click')
+            }  
+            if (e.ctrlKey && /(33)/.test(k)) {
+              e.preventDefault()
+              e.stopPropagation()           
+              $prev.trigger('click')  
+            }  
+          }
+          
         }
 
         if (typeof $this.attr('role') !== 'string') {
           $this.attr('role', 'complementary');
-          $this.attr('aria-labelledby', id_title + " " + id_desc);
-          $this.prepend('<p  id="' + id_desc   + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images</p>')
+          $this.attr('aria-labelledby', id_title);
+          $this.attr('aria-describedby', id_desc);
+          $this.prepend('<p  id="' + id_desc   + '" class="sr-only">A carousel is a rotating set of images, rotation stops on keyboard focus on carousel tab controls or hovering the mouse pointer over images.  Use the tabs or the previous and next buttons to change the displayed slide.</p>')
           $this.prepend('<h2 id="' + id_title  + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
         }  
 
@@ -41,7 +59,6 @@
         $tabs.blur(function(event) {
           $(this).removeClass('focus')
         })
-
                 
         for (i = 0; i < $tabs.length; i++) {
           var tab = $tabs[i]

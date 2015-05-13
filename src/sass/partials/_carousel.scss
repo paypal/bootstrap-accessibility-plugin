@@ -22,3 +22,8 @@ a.carousel-control:focus,
   -moz-boxshadow: 0px 0px 0px 1px #000000;
   -webkit-boxshadow: 0px 0px 0px 1px #000000;
 }
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
