@@ -1,7 +1,7 @@
   // Modal Extension
   // ===============================
 
-	$('.modal-dialog').attr( {'role' : 'document'})
+	$('.modal-dialog:not(.no-boot-a11y)').attr( {'role' : 'document'})
     var modalhide =   $.fn.modal.Constructor.prototype.hide
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
@@ -15,11 +15,11 @@
       var focEls = this.$element.find(":tabbable")
         , lastEl = focEls[focEls.length-1]
       $(document).on('keydown.bs.modal', $.proxy(function (ev) {
-        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {
           lastEl.focus()
           ev.preventDefault();
         }
       }, this))
 
       modalfocus.apply(this, arguments)
-    }    
+    }

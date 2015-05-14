@@ -94,7 +94,7 @@
   // Modal Extension
   // ===============================
 
-	$('.modal-dialog').attr( {'role' : 'document'})
+	$('.modal-dialog:not(.no-boot-a11y)').attr( {'role' : 'document'})
     var modalhide =   $.fn.modal.Constructor.prototype.hide
     $.fn.modal.Constructor.prototype.hide = function(){
        var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]')
@@ -108,25 +108,26 @@
       var focEls = this.$element.find(":tabbable")
         , lastEl = focEls[focEls.length-1]
       $(document).on('keydown.bs.modal', $.proxy(function (ev) {
-        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {
           lastEl.focus()
           ev.preventDefault();
         }
       }, this))
 
       modalfocus.apply(this, arguments)
-    }    
+    }
+
   // DROPDOWN Extension
   // ===============================
-  
-  var toggle   = '[data-toggle=dropdown]'
+
+  var toggle   = '[data-toggle=dropdown]:not(.no-boot-a11y)'
       , $par
       , firstItem
       , focusDelay = 200
-      , menus = $(toggle).parent().find('ul').attr('role','menu')
-      , lis = menus.find('li').attr('role','presentation')
+      , menus = $(toggle).parent().find('ul:not(.no-boot-a11y)').attr('role','menu')
+      , lis = menus.find('li:not(.no-boot-a11y)').attr('role','presentation')
 
-    lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
+    lis.find('a:not(.no-boot-a11y)').attr({'role':'menuitem', 'tabIndex':'-1'})
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
     $(toggle).parent().on('shown.bs.dropdown',function(e){
@@ -135,10 +136,10 @@
       $toggle.attr('aria-expanded','true')
       $toggle.on('keydown.bs.modal', $.proxy(function (ev) {
         setTimeout(function(){
-              firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
+              firstItem = $('.dropdown-menu:not(.no-boot-a11y) [role=menuitem]:visible', $par)[0]
               try{ firstItem.focus()} catch(ex) {}
         }, focusDelay)
-      }, this)) 
+      }, this))
 
     })
 
@@ -155,15 +156,16 @@
         setTimeout(function() {
          if(!$.contains(that, document.activeElement)){
           $this.parent().removeClass('open')
-          $this.parent().find('[data-toggle=dropdown]').attr('aria-expanded','false')
+          $this.parent().find('[data-toggle=dropdown]:not(.no-boot-a11y)').attr('aria-expanded','false')
          }
         }, 150)
        })
       .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown)
+
   // Tab Extension
   // ===============================
-  
-  var $tablist = $('.nav-tabs, .nav-pills')
+
+  var $tablist = $('.nav-tabs:not(.no-boot-a11y), .nav-pills:not(.no-boot-a11y)')
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
@@ -236,10 +238,11 @@
       element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '0' })
    }
 
+
   // Collapse Extension
   // ===============================
 
-     var $colltabs =  $('[data-toggle="collapse"]')      
+     var $colltabs =  $('[data-toggle="collapse"]:not(.no-boot-a11y)')
       $colltabs.each(function( index ) {
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
@@ -251,7 +254,7 @@
 
           if(collparent){
             colltab.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
-            $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
+            $(collparent).find('div:not(.collapse,.panel-body,.no-boot-a11y), h4:not(.no-boot-a11y)').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
 
             if(collpanel.hasClass('in')){
@@ -327,11 +330,12 @@
     }
 
     $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
-    
+
+
   // Carousel Extension
   // ===============================
-  
-      $('.carousel').each(function (index) {
+
+      $('.carousel:not(.no-boot-a11y)').each(function (index) {
         var $this = $(this)
           , prev = $this.find('[data-slide="prev"]')
           , next = $this.find('[data-slide="next"]')
@@ -395,7 +399,7 @@
       if (!/(37|38|39|40)/.test(k)) return
       index = $items.index($items.filter('.active'))
       if (k == 37 || k == 38) {                           //  Up
-        
+
         index--
         if(index < 0) index = $items.length -1
         else  {
@@ -403,21 +407,21 @@
           setTimeout(function () {
             $items[index].focus()
             // $this.prev().focus()
-          }, 150)      
-        }  
+          }, 150)
+        }
 
       }
       if (k == 39 || k == 40) {                          // Down
         index++
         if(index == $items.length) {
           index = 0
-        }  
+        }
         else  {
           $parent.carousel('next')
           setTimeout(function () {
             $items[index].focus()
             // $this.next().focus()
-          }, 150)            
+          }, 150)
         }
 
       }

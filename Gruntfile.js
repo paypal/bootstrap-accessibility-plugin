@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n' ,
 
-		license: 
+		license:
 			'/* ========================================================================' + '\n' +
 
 			'* Extends Bootstrap v3.1.1' + '\n' + '\n' +
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 					'src/js/collapse.js',
 					'src/js/carousel.js'
 				],
-			}			
+			}
 		},
 
 	    concat: {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 					'src/js/carousel.js'
 				],
 	        	dest: 'plugins/js/bootstrap-accessibility.js'
-	       	} 
+	       	}
 	    },
 
 		uglify: {
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 			dist: {
 				files: {
 					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js',
-					'plugins/js/bootstrap-accessibility_1.0.3.min.js': 'plugins/js/bootstrap-accessibility_1.0.3.js'
+					'plugins/js/bootstrap-accessibility_<%= pkg.version %>.min.js': 'plugins/js/bootstrap-accessibility_<%= pkg.version %>.js'
 				}
 			}
 		},
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 					outputStyle: 'compressed'
 				}
 			}
-		},		
+		},
 
 	});
 
