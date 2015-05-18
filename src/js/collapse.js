@@ -2,7 +2,7 @@
   // Collapse Extension
   // ===============================
 
-     var $colltabs =  $('[data-toggle="collapse"]')      
+     var $colltabs =  $('[data-toggle="collapse"]:not(.no-boot-a11y)')
       $colltabs.each(function( index ) {
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
@@ -14,7 +14,7 @@
 
           if(collparent){
             colltab.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
-            $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
+            $(collparent).find('div:not(.collapse,.panel-body,.no-boot-a11y), h4:not(.no-boot-a11y)').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
 
             if(collpanel.hasClass('in')){
@@ -90,4 +90,4 @@
     }
 
     $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
-    
+

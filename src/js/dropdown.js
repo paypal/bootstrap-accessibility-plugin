@@ -1,14 +1,14 @@
   // DROPDOWN Extension
   // ===============================
-  
-  var toggle   = '[data-toggle=dropdown]'
+
+  var toggle   = '[data-toggle=dropdown]:not(.no-boot-a11y)'
       , $par
       , firstItem
       , focusDelay = 200
-      , menus = $(toggle).parent().find('ul').attr('role','menu')
-      , lis = menus.find('li').attr('role','presentation')
+      , menus = $(toggle).parent().find('ul:not(.no-boot-a11y)').attr('role','menu')
+      , lis = menus.find('li:not(.no-boot-a11y)').attr('role','presentation')
 
-    lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
+    lis.find('a:not(.no-boot-a11y)').attr({'role':'menuitem', 'tabIndex':'-1'})
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
     $(toggle).parent().on('shown.bs.dropdown',function(e){
@@ -17,10 +17,10 @@
       $toggle.attr('aria-expanded','true')
       $toggle.on('keydown.bs.modal', $.proxy(function (ev) {
         setTimeout(function(){
-              firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
+              firstItem = $('.dropdown-menu:not(.no-boot-a11y) [role=menuitem]:visible', $par)[0]
               try{ firstItem.focus()} catch(ex) {}
         }, focusDelay)
-      }, this)) 
+      }, this))
 
     })
 
@@ -37,7 +37,7 @@
         setTimeout(function() {
          if(!$.contains(that, document.activeElement)){
           $this.parent().removeClass('open')
-          $this.parent().find('[data-toggle=dropdown]').attr('aria-expanded','false')
+          $this.parent().find('[data-toggle=dropdown]:not(.no-boot-a11y)').attr('aria-expanded','false')
          }
         }, 150)
        })
