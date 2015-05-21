@@ -45,7 +45,8 @@ module.exports = function(grunt) {
 			footer: '\n\n })(jQuery);'
 	      },
 			bootstrap: {
-				src: [
+                files: {
+				'plugins/js/bootstrap-accessibility.js': [
 					'src/js/functions.js',
 					'src/js/modal.js',
 					'src/js/dropdown.js',
@@ -53,7 +54,15 @@ module.exports = function(grunt) {
 					'src/js/collapse.js',
 					'src/js/carousel.js'
 				],
-	        	dest: 'plugins/js/bootstrap-accessibility.js'
+				'plugins/js/bootstrap-accessibility_<%= pkg.version %>.js': [
+					'src/js/functions.js',
+					'src/js/modal.js',
+					'src/js/dropdown.js',
+					'src/js/tab.js',
+					'src/js/collapse.js',
+					'src/js/carousel.js'
+				]
+                }
 	       	}
 	    },
 
@@ -66,7 +75,7 @@ module.exports = function(grunt) {
 			dist: {
 				files: {
 					'plugins/js/bootstrap-accessibility.min.js': 'plugins/js/bootstrap-accessibility.js',
-					'plugins/js/bootstrap-accessibility_<%= pkg.version %>.min.js': 'plugins/js/bootstrap-accessibility_<%= pkg.version %>.js'
+					'plugins/js/bootstrap-accessibility_<%= pkg.version %>.min.js': 'plugins/js/bootstrap-accessibility.js'
 				}
 			}
 		},
