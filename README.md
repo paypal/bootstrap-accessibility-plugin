@@ -57,7 +57,7 @@ Feel free to play with the [live demo](https://paypal.github.io/bootstrap-access
 2. Generate a random id, assign it to the tooltip div, and reference it from the Tooltip element with the ARIA attribute "aria-describedby".
 3. Remove aria-describedby when the tooltip is hidden.
 
-### Popover 
+### Popover
 1. Add role of Tooltip to popover div.
 2. Generate a random id, assign it to Popover div, and reference it from the Tooltip element with the ARIA attribute "aria-describedby".
 3. Remove aria-describedby when the popover is dismissed.
@@ -68,7 +68,7 @@ Feel free to play with the [live demo](https://paypal.github.io/bootstrap-access
 3. Change the focus outline of close button to visible.
 4. Close button now accessible to screen readers.
 
-### Dropdown 
+### Dropdown
 1. Add aria-haspopup and and aria-expanded attributes to dropdown toggle link.
 2. Dynamically change aria-expanded when the dropdown closes or opens.
 3. Focus to first item on activating dropdown.
@@ -83,7 +83,7 @@ Feel free to play with the [live demo](https://paypal.github.io/bootstrap-access
 4. Add keydown event listener for the tab to work with keyboard.
 5. Dynamically flip tabIndex, aria-selected, and aria-expanded for tab when it is activated and add aria-hidden to hide the previously visible tab.
 
-### Collapse 
+### Collapse
 1. Add tab role, aria-selected, aria-expanded, aria-controls, and tabIndex for collapse tab.
 2. Add ARIA roles of tabPanel, tabIndex, aria-hidden, and aria-labelledBy for collapsible panel.
 3. Add role of tabList and aria-multiselectable for collapse container div.
@@ -99,6 +99,9 @@ Feel free to play with the [live demo](https://paypal.github.io/bootstrap-access
 6. Add keydown event listener for the carousel to work with keyboard.
 7. Dynamically change tabIndex and aria-selected property of active and inactive tabs.
 8. Remove display:none and hide (offscreen) of the inactive carousel items, so that screen readers can count the total number of carousel items.
+
+### Disabling bootstrap accessibility for specific elements or sections
+If you want to implement your own specific aria configuration for a particular element or region, you can add a class of `no-boot-a11y` to a given element.
 
 ## Re-compiling
 You may want to extend the plugin further or change some of the code. Here is how to do it:
@@ -119,7 +122,7 @@ You may want to extend the plugin further or change some of the code. Here is ho
    grunt
   ```
 5. To run the examples, initialize the git submodules:
- 
+
   ```sh
   git submodule init
   git submodule update
