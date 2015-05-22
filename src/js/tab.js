@@ -1,7 +1,7 @@
   // Tab Extension
   // ===============================
-  
-  var $tablist = $('.nav-tabs, .nav-pills')
+
+  var $tablist = $('.nav-tabs:not(.no-boot-a11y), .nav-pills:not(.no-boot-a11y)')
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
 
