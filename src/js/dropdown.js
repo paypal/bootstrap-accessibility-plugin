@@ -15,7 +15,7 @@
       $par = $(this)
       var $toggle = $par.find(toggle)
       $toggle.attr('aria-expanded','true')
-      $toggle.on('keydown.bs.modal', $.proxy(function (ev) {
+      $toggle.on('keydown.bs.dropdown', $.proxy(function (ev) {
         setTimeout(function(){
               firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
               try{ firstItem.focus()} catch(ex) {}
