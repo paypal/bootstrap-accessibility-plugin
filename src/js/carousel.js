@@ -1,7 +1,60 @@
-  // Carousel Extension
+// Carousel Extension
   // ===============================
   
       $('.carousel').each(function (index) {
+      
+        // This function positions a highlight box around the tabs in the tablist to use in focus styling
+        
+        function setTablistHighlightBox() {
+
+          var $tab
+              , offset
+              , height
+              , width
+              , highlightBox = {}
+
+            highlightBox.top     = 0
+          highlightBox.left    = 32000
+          highlightBox.height  = 0
+          highlightBox.width   = 0
+
+          for (var i = 0; i < $tabs.length; i++) {
+            $tab = $tabs[i]
+            offset = $($tab).offset()
+            height = $($tab).height()
+            width  = $($tab).width()
+          
+//            console.log(" Top: " + offset.top + " Left: " + offset.left + " Height: " + height + " Width: " + width)
+          
+            if (highlightBox.top < offset.top) { 
+              highlightBox.top    = Math.round(offset.top)
+            }
+
+            if (highlightBox.height < height) { 
+              highlightBox.height = Math.round(height)
+            }
+            
+            if (highlightBox.left > offset.left) {
+              highlightBox.left = Math.round(offset.left)
+            }
+          
+            var w = (offset.left - highlightBox.left) + Math.round(width)
+          
+            if (highlightBox.width < w) {
+              highlightBox.width = w 
+            }
+              
+          } // end for
+
+//          console.log("[HIGHLIGHT]  Top: " +  highlightBox.top + " Left: " +  highlightBox.left + " Height: " +  highlightBox.height + " Width: " +  highlightBox.width)
+          
+          $tablistHighlight.style.top    = (highlightBox.top    - 2)  + 'px'
+          $tablistHighlight.style.left   = (highlightBox.left   - 2)  + 'px'
+          $tablistHighlight.style.height = (highlightBox.height + 7)  + 'px'
+          $tablistHighlight.style.width  = (highlightBox.width  + 8)  + 'px'
+        
+        } // end function
+      
         var $this = $(this)
           , $prev        = $this.find('[data-slide="prev"]')
           , $next        = $this.find('[data-slide="next"]')
@@ -9,14 +62,31 @@
           , $tabs       = $this.find('.carousel-indicators li')
           , $tabpanels  = $this.find('.item')
           , $tabpanel
+          , $tablistHighlight
+          , $pauseCarousel
+          , $tab
+          , offset
+          , height
+          , width
           , i
           , id_title  = 'id_title'
           , id_desc   = 'id_desc'
+
 
         $tablist.attr('role', 'tablist')
         
         $tabs.focus(function() {
           $this.carousel('pause')
+          $(this).parent().addClass('active');
+//          $(this).addClass('focus')
+          setTablistHighlightBox()
+          $($tablistHighlight).addClass('focus')
+        })
+
+        $tabs.blur(function(event) {
+          $(this).parent().removeClass('active');
+//          $(this).removeClass('focus')
+          $($tablistHighlight).removeClass('focus')
         })
 
         
@@ -25,23 +95,6 @@
           $tabpanel.setAttribute('role', 'tabpanel')
           $tabpanel.setAttribute('id', 'tabpanel-' + index + '-' + i)
           $tabpanel.setAttribute('aria-labelledby', 'tab-' + index + '-' + i)
-
-          // Support keyboard support for tabpanel navigation from with an tabpanel
-          // PageUp and PageDown
-          $tabpanel.keydown(function(e) {
-            var k = e.which || e.keyCode
-            if (e.ctrlKey && /(34)/.test(k)) {
-              e.preventDefault()
-              e.stopPropagation()           
-              $next.trigger('click')
-            }  
-            if (e.ctrlKey && /(33)/.test(k)) {
-              e.preventDefault()
-              e.stopPropagation()           
-              $prev.trigger('click')  
-            }  
-          }
-          
         }
 
         if (typeof $this.attr('role') !== 'string') {
@@ -52,20 +105,13 @@
           $this.prepend('<h2 id="' + id_title  + '" class="sr-only">Carousel content with ' + $tabpanels.length + ' slides.</h2>')
         }  
 
-        $tabs.focus(function(event) {
-          $(this).addClass('focus');
-        })
-
-        $tabs.blur(function(event) {
-          $(this).removeClass('focus')
-        })
                 
         for (i = 0; i < $tabs.length; i++) {
-          var tab = $tabs[i]
+          $tab = $tabs[i]
           
-          tab.setAttribute('role', 'tab')
-          tab.setAttribute('id', 'tab-' + index + '-' + i)
-          tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
+          $tab.setAttribute('role', 'tab')
+          $tab.setAttribute('id', 'tab-' + index + '-' + i)
+          $tab.setAttribute('aria-controls', 'tabpanel-' + index + '-' + i)
           
           var tpId = '#tabpanel-' + index + '-' + i
           var caption = $this.find(tpId).find('h1').text()
@@ -82,11 +128,41 @@
           var tabName = document.createElement('span')
           tabName.setAttribute('class', 'sr-only')
           tabName.innerHTML='Slide ' + (i+1)
-          if (caption) tabName.innerHTML += ": " +  caption
+          if (caption) tabName.innerHTML += ": " +  caption          
+          $tab.appendChild(tabName)
           
-          tab.appendChild(tabName)
-        }
+         }
 
+        // create div for focus styling of tablist
+        $tablistHighlight = document.createElement('div')
+        $tablistHighlight.className = 'carousel-tablist-highlight'
+        document.body.appendChild($tablistHighlight)
+        
+        // create button for screen reader users to stop rotation of carousel
+
+        // create button for screen reader users to pause carousel for virtual mode review
+        $pauseCarousel = document.createElement('button')
+        $pauseCarousel.className = "carousel-pause-button"
+        $pauseCarousel.innerHTML = "Pause Carousel"
+        $pauseCarousel.setAttribute('title', "Pause carousel button can be used by screen reader users to stop carousel animations")
+        $(document.body).prepend($pauseCarousel)
+        $($pauseCarousel).click(function() {
+          $this.carousel('pause')
+        })
+        $($pauseCarousel).focus(function() {
+          $(this).addClass('focus')
+        })
+        
+        $($pauseCarousel).blur(function() {
+          $(this).removeClass('focus')
+        })
+        
+        setTablistHighlightBox()
+
+        $( window ).resize(function() {
+          setTablistHighlightBox()
+        })
+        
         // Add space bar behavior to prev and next buttons for SR compatibility
         $prev.attr('aria-label', 'Previous Slide')
         $prev.keydown(function(e) {
@@ -202,4 +278,3 @@
       e.stopPropagation()
     }
     $(document).on('keydown.carousel.data-api', 'li[role=tab]', $.fn.carousel.Constructor.prototype.keydown)
-
