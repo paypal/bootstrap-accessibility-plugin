@@ -65,6 +65,7 @@
           , $tablistHighlight
           , $pauseCarousel
           , $tab
+          , $is_paused = false
           , offset
           , height
           , width
@@ -77,6 +78,8 @@
         
         $tabs.focus(function() {
           $this.carousel('pause')
+          $is_paused = true
+          $pauseCarousel.innerHTML = "Play Carousel"
           $(this).parent().addClass('active');
 //          $(this).addClass('focus')
           setTablistHighlightBox()
@@ -144,10 +147,19 @@
         $pauseCarousel = document.createElement('button')
         $pauseCarousel.className = "carousel-pause-button"
         $pauseCarousel.innerHTML = "Pause Carousel"
-        $pauseCarousel.setAttribute('title', "Pause carousel button can be used by screen reader users to stop carousel animations")
+        $pauseCarousel.setAttribute('title', "Pause/Play carousel button can be used by screen reader users to stop carousel animations")
         $(document.body).prepend($pauseCarousel)
         $($pauseCarousel).click(function() {
-          $this.carousel('pause')
+          if ($is_paused) {
+            $pauseCarousel.innerHTML = "Pause Carousel"
+            $this.carousel('cycle')
+            $is_paused = false
+          }
+          else {
+            $pauseCarousel.innerHTML = "Play Carousel"
+            $this.carousel('pause')
+            $is_paused = true
+          }  
         })
         $($pauseCarousel).focus(function() {
           $(this).addClass('focus')
