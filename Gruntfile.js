@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 			'/* ========================================================================' + '\n' +
 
 			'* Extends Bootstrap v3.1.1' + '\n' + '\n' +
-			'* Copyright (c) <2014> eBay Software Foundation' + '\n' +  '\n' +
+			'* Copyright (c) <2015> eBay Software Foundation' + '\n' +  '\n' +
 			'* All rights reserved.' + '\n' +   '\n' +
 			'* Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:' + '\n' +'\n' +
 			'* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.' + '\n' +'\n' +
