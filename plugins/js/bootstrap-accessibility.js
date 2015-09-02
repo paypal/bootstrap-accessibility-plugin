@@ -1,7 +1,7 @@
 /* ========================================================================
 * Extends Bootstrap v3.1.1
 
-* Copyright (c) <2014> eBay Software Foundation
+* Copyright (c) <2015> eBay Software Foundation
 
 * All rights reserved.
 
@@ -394,6 +394,7 @@
           , $tabpanel
           , $tablistHighlight
           , $pauseCarousel
+          , $complementaryLandmark
           , $tab
           , $is_paused = false
           , offset
@@ -414,12 +415,14 @@
 //          $(this).addClass('focus')
           setTablistHighlightBox()
           $($tablistHighlight).addClass('focus')
+          $(this).parents('.carousel').addClass('contrast')
         })
 
         $tabs.blur(function(event) {
           $(this).parent().removeClass('active');
 //          $(this).removeClass('focus')
           $($tablistHighlight).removeClass('focus')
+          $(this).parents('.carousel').removeClass('contrast')
         })
 
         
@@ -474,11 +477,16 @@
         // create button for screen reader users to stop rotation of carousel
 
         // create button for screen reader users to pause carousel for virtual mode review
+        $complementaryLandmark = document.createElement('aside')
+        $complementaryLandmark.setAttribute('aria-label', 'carousel pause/play control')
+        $(document.body).prepend($complementaryLandmark)
+        
         $pauseCarousel = document.createElement('button')
         $pauseCarousel.className = "carousel-pause-button"
         $pauseCarousel.innerHTML = "Pause Carousel"
         $pauseCarousel.setAttribute('title', "Pause/Play carousel button can be used by screen reader users to stop carousel animations")
-        $(document.body).prepend($pauseCarousel)
+        $($complementaryLandmark).append($pauseCarousel)
+        
         $($pauseCarousel).click(function() {
           if ($is_paused) {
             $pauseCarousel.innerHTML = "Pause Carousel"
@@ -515,6 +523,14 @@
             $prev.trigger('click');
           }
         });
+
+        $prev.focus(function() {
+          $(this).parents('.carousel').addClass('contrast')
+        })        
+
+        $prev.blur(function() {
+          $(this).parents('.carousel').removeClass('contrast')
+        })        
         
         $next.attr('aria-label', 'Next Slide')
         $next.keydown(function(e) {
@@ -525,6 +541,22 @@
             $next.trigger('click');
           }
         });
+
+        $next.focus(function() {
+          $(this).parents('.carousel').addClass('contrast')
+        })        
+
+        $next.blur(function() {
+          $(this).parents('.carousel').removeClass('contrast')
+        })        
+        
+        $('.carousel-inner a').focus(function() {
+          $(this).parents('.carousel').addClass('contrast')
+        })        
+
+         $('.carousel-inner a').blur(function() {
+          $(this).parents('.carousel').removeClass('contrast')
+        })        
 
         $tabs.each(function () {
           var item = $(this)

@@ -53,7 +53,8 @@ a.carousel-control:focus {
 }
 
 
-.carousel-caption {
-//    background-color: rgba(0, 0, 0, 0.5);
-//    z-index: 10;
+.carousel:hover .carousel-caption,
+.carousel.contrast .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
