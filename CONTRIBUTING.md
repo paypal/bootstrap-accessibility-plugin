@@ -54,4 +54,4 @@ Please make sure you have installed the plugin as per instructions below before 
 
 If you have any questions about contributing, please feel free to contact us by posting your questions on Github.
 
-Copyright 2014, eBay Software Foundation under [the BSD license](LICENSE.md).
+Copyright 2014, PayPal under [the BSD license](LICENSE.md).
