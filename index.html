@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Bootstrap-accessibility-plugin : Accessibility Plugin for Bootstrap 3 and Bootstrap 3 as SubModule" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Bootstrap accessibility plugin</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner" style="max-width:800px">
+          <a id="forkme_banner" href="https://github.com/paypal/bootstrap-accessibility-plugin">View on GitHub</a>
+
+          <a href="http://paypal.github.io" style="float: left;"><img src="images/logo/bootstrapa11ywhitetransparent.png" alt="Bootstrap Logo"></a>
+          <div style="display:inline; margin-left:100px;position:relative;top:-13px;left:25px">
+            <h1 id="project_title">Bootstrap accessibility plugin</h1>
+            <h2 id="project_tagline">Accessibility Plugin for Bootstrap 3 and Bootstrap 3 as SubModule</h2>
+          </div>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/paypal/bootstrap-accessibility-plugin/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/paypal/bootstrap-accessibility-plugin/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="http://paypal.github.com/bootstrap-accessibility-plugin">Bootstrap Accessibility Plugin</a> is an extension for the <a href="http://getbootstrap.com/">Bootstrap 3 web development framework</a> that makes many of the components of this library accessible for keyboard and screen reader users. This plugin is available on <a href="https://github.com/paypal/bootstrap-accessibility-plugin">Github</a>  under the <a href="https://github.com/paypal/bootstrap-accessibility-plugin/blob/master/LICENSE.md">BSD license</a>. We hope that this extension will make it very simple for website developers who use Bootstrap 3 components to provide great user experience for as many users as possible.</p>
+
+<p>If you develop websites or web applications using Bootstrap components and want it to be accessible with a minimal development effort, this accessibility plugin may be the perfect solution. By adding the JavaScript plugin in your Bootstrapped HTML pages, you extend the stock components with an additional mark-up and events without modifying the original Bootstrap code. In doing so, you make those widgets keyboard-navigable and introduce the compatibility with screen reader software used by people who are visually impaired. </p>
+
+<h2>
+<a name="Bookmarklet" class="anchor" href="#bookmarklet"><span class="octicon octicon-link"></span></a>Bookmarklet</h2>
+
+<p><strong>Experimental:</strong> if you want an even easier way to apply the Bootstrap Accessibility Plugin to your Bootstrap-driven website, you may want to try out our Bootstrap Accessibility Bookmarklet below.</p>
+<p><a href="javascript:(function(){var lin=document.createElement('link');lin.setAttribute('rel','stylesheet');lin.setAttribute('type','text/css');lin.setAttribute('href', 'http://paypal.github.io/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css');document.getElementsByTagName('head')[0].appendChild(lin);var scr=document.createElement('SCRIPT');scr.type='text/javascript';scr.src='http://paypal.github.io/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js';document.getElementsByTagName('head')[0].appendChild(scr);})();">
+Bootstrap Accessibility 
+</a><br>
+		This bookmarklet allows you to apply Bootstrap Accessibility Plugin features to any page that runs Bootstrap widgets. To install, follow these steps:
+<ol>	
+<li>copy or drag the bookmarklet link above to your browser bookmarks</li>
+<li>	Go to a webpage with Bootstrap widgets</li>
+<li>Click bookmarklet in your "bookmarks" bar to load the plugin</li>
+</ol>	
+</p>
+
+<h2>
+<a name="Features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+
+<p>This plugin provides enhancements to the Bootstrap 3 components in two areas: keyboard navigation and  screen reader compatibility. There are also minor changes to improve color contrast in alert messages.</p>
+
+<h3>
+<a name="keyboard-navigation" class="anchor" href="#keyboard-navigation"><span class="octicon octicon-link"></span></a>Keyboard Navigation</h3>
+
+<p>For some widgets, like tab panel, carousel, drop-down menu, etc, the onKeyDown event is employed in various places in order to make the desktop-style keyboard navigation possible. This enables someone who does not or cannot use the mouse navigate those components using tab and arrow keys. To further enhance the seamless navigation for keyboard users the plugin manages keyboard focus wherever appropriate.</p>
+
+<h3>
+<a name="compatibility-with-screen-readers" class="anchor" href="#compatibility-with-screen-readers"><span class="octicon octicon-link"></span></a>Compatibility With Screen Readers</h3>
+
+<p>Once the plugin is loaded into your page, it will search for any available Bootstrap components and, if found, append the necessary <a href="http://www.w3.org/TR/wai-aria/">ARIA roles and states</a> to provide the enhanced semantics to those widgets. This is primarily useful for screen readers. Without ARIA mark-up it is difficult for this technology to express the meaning of dynamic elements, such as modeless alerts, tab panels, popup menus, carousels, etc, to users who cannot see the screen.</p>
+
+<h3>
+<a name="color-contrast" class="anchor" href="#color-contrast"><span class="octicon octicon-link"></span></a>Color Contrast</h3>
+
+<p>We found that the foreground-to-background color contrast ratio for a Bootstrap alert message is too low. To make it easier for users to read, the color contrast has been increased.</p>
+
+<p>Please see the <a href="https://github.com/paypal/bootstrap-accessibility-plugin/blob/master/README.md">README</a> file for the list of components and more implementation details.</p>
+
+<h2>
+<a name="try-it-out" class="anchor" href="#try-it-out"><span class="octicon octicon-link"></span></a>Try it out</h2>
+
+<p>If you want to use the Bootstrap Accessibility Plugin in your project, simply include the JavaScript file right after Bootstrap’s JavaScript file. The exact instructions of how to do this can be found in the <a href="https://github.com/paypal/bootstrap-accessibility-plugin/blob/master/README.md">README</a>.</p>
+
+<p>Also, play around with the live <a href="demo.html">demo</a> of the Bootstrap Accessibility Plugin. For better effect, you may want to get hold of one of the <a href="http://en.wikipedia.org/wiki/List_of_screen_readers">popular screen readers</a> if you would like to immerse yourself into the screen reader user experience. Seeing and hearing how “accessified” widgets work in this demo will help you verify whether the plugin is installed correctly on your website.</p>
+
+<p>We look forward to improvements and suggestions from the community. To learn more about how Bootstrap Accessibility Plugin works, check out our <a href="https://github.com/paypal/bootstrap-accessibility-plugin/blob/master/README.md">detailed documentation</a>.</p>
+
+<p>To stay in touch with us, follow <a href="http://twitter.com/paypalinclusive">@PayPalInclusive</a> and <a href="https://github.com/paypal/bootstrap-accessibility-plugin/issues">submit issues </a>on GitHub.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Bootstrap-accessibility-plugin maintained by <a href="https://github.com/paypal">paypal</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
