@@ -11,24 +11,26 @@
     lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
-    $(toggle).parent().on('shown.bs.dropdown',function(e){
-      $par = $(this)
-      var $toggle = $par.find(toggle)
-      $toggle.attr('aria-expanded','true')
-      $toggle.on('keydown.bs.dropdown', $.proxy(function (ev) {
-        setTimeout(function(){
-              firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
-              try{ firstItem.focus()} catch(ex) {}
-        }, focusDelay)
-      }, this))
+    $(toggle).parent()
+      // Update aria-expanded when open
+      .on('shown.bs.dropdown',function(e){
+        $par = $(this)
+        var $toggle = $par.find(toggle)
+        $toggle.attr('aria-expanded','true')
+        $toggle.on('keydown.bs.dropdown', $.proxy(function (ev) {
+          setTimeout(function() {
+            firstItem = $('.dropdown-menu [role=menuitem]:visible', $par)[0]
+            try{ firstItem.focus()} catch(ex) {}
+          }, focusDelay)
+        }, this))
 
-    })
-
-    $(toggle).parent().on('hidden.bs.dropdown',function(e){
-      $par = $(this)
-      var $toggle = $par.find(toggle)
-      $toggle.attr('aria-expanded','false')
-    })
+      })
+      // Update aria-expanded when closed
+      .on('hidden.bs.dropdown',function(e){
+        $par = $(this)
+        var $toggle = $par.find(toggle)
+        $toggle.attr('aria-expanded','false')
+      })
 
     $(document)
       .on('focusout.dropdown.data-api', '.dropdown-menu', function(e){
