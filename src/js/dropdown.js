@@ -8,7 +8,9 @@
       , menus = $(toggle).parent().find('ul').attr('role','menu')
       , lis = menus.find('li').attr('role','presentation')
 
+    // add menuitem role and tabIndex to dropdown links
     lis.find('a').attr({'role':'menuitem', 'tabIndex':'-1'})
+    // add aria attributes to dropdown toggle
     $(toggle).attr({ 'aria-haspopup':'true', 'aria-expanded': 'false'})
 
     $(toggle).parent()
@@ -32,6 +34,7 @@
         $toggle.attr('aria-expanded','false')
       })
 
+    // Close the dropdown if tabbed away from
     $(document)
       .on('focusout.dropdown.data-api', '.dropdown-menu', function(e){
         var $this = $(this)
