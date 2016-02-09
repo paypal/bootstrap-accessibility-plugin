@@ -42,10 +42,9 @@
           return;
         }
         setTimeout(function() {
-         if(!$.contains(that, document.activeElement)){
-          $this.parent().removeClass('open')
-          $this.parent().find('[data-toggle=dropdown]').attr('aria-expanded','false')
-         }
+          if(!$.contains(that, document.activeElement)){
+            $this.parent().find('[data-toggle=dropdown]').dropdown('toggle')
+          }
         }, 150)
        })
       .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown)
