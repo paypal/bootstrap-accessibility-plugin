@@ -2,7 +2,7 @@
   // Collapse Extension
   // ===============================
 
-     var $colltabs =  $('[data-toggle="collapse"]')      
+     var $colltabs =  $('[data-toggle="collapse"]')
       $colltabs.each(function( index ) {
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
@@ -89,5 +89,5 @@
 
     }
 
-    $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
+    $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown);
     
