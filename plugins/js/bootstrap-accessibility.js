@@ -488,8 +488,9 @@
 
         // create button for screen reader users to pause carousel for virtual mode review
         $complementaryLandmark = document.createElement('aside')
+        $complementaryLandmark.setAttribute('class', 'carousel-aside-pause')
         $complementaryLandmark.setAttribute('aria-label', 'carousel pause/play control')
-        $(document.body).prepend($complementaryLandmark)
+        $this.prepend($complementaryLandmark)
 
         $pauseCarousel = document.createElement('button')
         $pauseCarousel.className = "carousel-pause-button"
