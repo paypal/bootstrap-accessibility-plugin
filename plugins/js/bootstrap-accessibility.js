@@ -16,19 +16,19 @@
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 * ======================================================================== */
-
-
- (function($) {
-  "use strict";
+  
+ 
+ (function($) { 
+  "use strict"; 
 
   // GENERAL UTILITY FUNCTIONS
   // ===============================
-
+  
   var uniqueId = function(prefix) {
       return (prefix || 'ui-id') + '-' + Math.floor((Math.random()*1000)+1)
   }
 
-
+  
   var removeMultiValAttributes = function (el, attr, val) {
    var describedby = (el.attr( attr ) || "").split( /\s+/ )
       , index = $.inArray(val, describedby)
@@ -59,7 +59,7 @@
     return ( /input|select|textarea|button|object/.test( nodeName ) ?
     !element.disabled :
     "a" === nodeName ?
-    element.href || isTabIndexNotNaN :isTabIndexNotNaN) && visible( element ); // the element and all of its ancestors must be visible
+    element.href || isTabIndexNotNaN :isTabIndexNotNaN) && visible( element ); // the element and all of its ancestors must be visible  
   }
   var visible = function ( element ) {
     return $.expr.filters.visible( element ) &&
@@ -106,14 +106,14 @@
       var focEls = this.$element.find(":tabbable")
         , lastEl = focEls[focEls.length-1]
       $(document).on('keydown.bs.modal', $.proxy(function (ev) {
-        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.keyCode === 9) {  
           lastEl.focus()
           ev.preventDefault();
         }
       }, this))
 
       modalfocus.apply(this, arguments)
-    }
+    }    
 
   // DROPDOWN Extension
   // ===============================
@@ -167,11 +167,11 @@
           }
         }, 150)
        })
-      .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown)
+      .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , $.fn.dropdown.Constructor.prototype.keydown);
 
   // Tab Extension
   // ===============================
-
+  
   var $tablist = $('.nav-tabs, .nav-pills')
         , $lis = $tablist.children('li')
         , $tabs = $tablist.find('[data-toggle="tab"], [data-toggle="pill"]')
@@ -335,7 +335,8 @@
 
     }
 
-    $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown)
+    $(document).on('keydown.collapse.data-api','[data-toggle="collapse"]' ,  $.fn.collapse.Constructor.prototype.keydown);
+    
 
 // Carousel Extension
   // ===============================
@@ -661,7 +662,7 @@
       e.preventDefault()
       e.stopPropagation()
     }
-    $(document).on('keydown.carousel.data-api', 'li[role=tab]', $.fn.carousel.Constructor.prototype.keydown)
+    $(document).on('keydown.carousel.data-api', 'li[role=tab]', $.fn.carousel.Constructor.prototype.keydown);
 
 
  })(jQuery);
