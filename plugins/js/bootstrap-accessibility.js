@@ -239,7 +239,7 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
 
       if(tab.parent().hasClass('active')){
         tab.attr( { 'tabIndex' : '0', 'aria-selected' : 'true', 'aria-controls': tab.attr('href').substr(1) } )
-        tabpanel.attr({ 'role' : 'tabpanel', 'tabIndex' : '0', 'aria-hidden' : 'false', 'aria-labelledby':tabid })
+        tabpanel.attr({ 'role' : 'tabpanel', 'tabIndex' : '-1', 'aria-hidden' : 'false', 'aria-labelledby':tabid })
       }else{
         tab.attr( { 'tabIndex' : '-1', 'aria-selected' : 'false', 'aria-controls': tab.attr('href').substr(1) } )
         tabpanel.attr( { 'role' : 'tabpanel', 'tabIndex' : '-1', 'aria-hidden' : 'true', 'aria-labelledby':tabid } )
@@ -254,6 +254,12 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
       , k = e.which || e.keyCode
 
       $this = $(this)
+      // Activate tab when pressed spacebar
+      if (/(32)/.test(k)) {
+            $this.trigger("click")
+            e.preventDefault() && e.stopPropagation()
+            return;
+      }
       if (!/(37|38|39|40)/.test(k)) return
 
       $items = $ul.find('[role=tab]:visible')
@@ -290,7 +296,7 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
 
       element.addClass('active')
       element.find('[data-toggle=tab], [data-toggle=pill]').attr({ 'tabIndex' : '0','aria-selected' : true })
-      element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '0' })
+      element.filter('.tab-pane').attr({ 'aria-hidden' : false,'tabIndex' : '-1' })
    }
 
   // Collapse Extension
