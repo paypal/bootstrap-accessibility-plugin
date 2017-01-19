@@ -1,3 +1,111 @@
 [submodule "bs3"]
 	path = bs3
 	url = https://github.com/twbs/bootstrap.git
+   <?php
+   /**
+   NODE:
+         npm install paypal-rest-sdk
+	PHP:
+	// Prerequisites:  PHP 5.3 or above
+	cURL, json & openssl extensions must be enabled
+	composer require "paypalrest-api-sdk-php:*"
+	
+    PYTHON:
+    // System library dependencies: libssl-dev, libffi-dev
+    // Debian systems
+    apt-get install libssl-dev libffi-dev
+    // easy_install method
+    easy_install paypal rest sdk
+    // pip method
+    pip install paypal rest sdk
+    RUBY:
+    gem install paypal-sdk-rest
+    JAVA:
+      // Maven pom.xml file
+      <dependency>
+      <groupId>com.paypal.sdk</groupId>
+      <artifactId>rest-api-sdk</artifactId>
+      - $scope.addMessage = function() {
+      -  $scope.messages.$add({
+      -  text: $scope.newMessageText
+     - });
+     -  };
+     -  });
+     -  Create an instance
+     -  var auth = $firebaseAuth(re);
+     -  Login with Firebase
+     -  auth.$authWithOAuthPopup("firebase").then(function(authData) {
+     -  console.log("Logged in as:", authData.uid);
+     -  }).catch(function(error) {
+     -  console.log("Authentication failed", error);
+     -  });
+     -  });
+     -  var ref = newFirebase("<my firebase-db>").orderByChild('completed');.equalTo(false);
+     -  *
+     -  angular:
+     -  .module('myApp', ['firebase'])
+     -  .controller('MainCtrl', MainCtrl));
+     -  function MainCtrl($firebaseArray) {
+     -  var ref = newFirebase("https://array-demo.firebaseio-
+     -  demo.com/values").orderByChild('completed');
+     -  this.todos=$firebaseArray(ref);
+     -  this.showAll=false;
+     -  this.showCompleted=function(todo) {
+     -  return this.showAll || todo.completed===false;
+     -  };
+     -  MainCtrl.$inject = ['$firebaseArray'];
+     -  AJAX Requests
+     -  /echo simulates AJAXcalls:
+     -  JSON: /echo/json/
+     -  JSONP:
+     -  //jsfiddle.net/echo/jsonp/
+     -  HTML: /echo/html/
+     -  XML:  /echo/xml/
+     -  Fiddle Meta
+     -  Add title to make the fiddle public
+     -  Filter a $firebaseArray
+     -  JavaScript/CSS URI
+     -  AngularJS v1.3.15
+     -  2017 Google inc. http://angularjs.org
+     -   License MIT <2017> <Henry Baez>
+     -  https://github.com/firebase/angularfire/
+     -  https://jsfiddle.net/fvys2adL/2/#&togetherjs=mgh C
+     -  /**
+     -  Filter a $firebaseArray
+     -  return this.showAll()
+     -  };
+     -  this.toggleCompleted=function(todo) {
+     -  this.todo.$save(todo) };
+     -  HTML:
+     - < div ng-app="myApp" >
+     -  < div ng-controller="MainCtrl as ctrl">
+     -  <h3>Todo List</h3>
+     -  <label>
+     -   < input type="checkbox" ng-model="ctrl.showAll">
+     -  show Completed
+     -  <label>
+     -   <ul ng-repeat="todo in ctrl.todos">
+     -  Google Places API for Android
+     -  APIKey ServiceAccount OAuth2.Client
+     -  API key created
+     -  in your application passing it with
+     -  Parameter: <key=API.KEY>
+     -  <AIzaSyDo0509WWKY5Ii5VsYAuQvRPkX8JU6YMH4=API.KEY>
+     -  <version>LATEST</version>
+     -  </dependency>
+     -  // Gradle
+     -  repositories {
+     -  mavenCentral()
+     }
+     -  dependencies {
+     -   compile 'com.paypal.sdk:rest-api-sdk:+'
+     .NET:
+     // Run in NuGet package manager
+     PM> Install-Package PayPal
+     @0072016
+     https://developer.google.com/firebase
+     foo.gradle@gmail.ccom
+     2017-01-19T01:15:06.002
+     
+     
+      
