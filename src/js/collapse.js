@@ -9,6 +9,8 @@
         , parent  = colltab.attr('data-parent')
         , collparent = parent && $(parent)
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
+        , parentpanel = collpanel.parent() // panel containing title and panel body
+        , parentfirstchild = (collparent) ? collparent.find('.panel.panel-default:first-child') : null // first child of containing accordion
 
           colltab.attr('id', collid)
 
