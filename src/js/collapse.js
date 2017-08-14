@@ -19,13 +19,14 @@
             colltab.attr({ 'aria-controls': collpanel.attr('id'), 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
             $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
+            collpanel.attr({ 'role':'tabpanel', 'aria-labelledby':collid })
 
             if(collpanel.hasClass('in')){
               colltab.attr({ 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
-              collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
+              collpanel.attr({ 'tabindex':'0', 'aria-hidden':'false' })
             }else{
               colltab.attr({ 'tabindex':'-1' })
-              collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
+              collpanel.attr({ 'tabindex':'-1', 'aria-hidden':'true' })
             }
           }
       })
