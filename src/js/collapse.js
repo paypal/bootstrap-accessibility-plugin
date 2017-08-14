@@ -16,15 +16,15 @@
           colltab.attr('id', collid)
 
           if(collparent){
-            colltab.attr({ 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
+            colltab.attr({ 'aria-controls': collpanel.attr('id'), 'role':'tab', 'aria-selected':'false', 'aria-expanded':'false' })
             $(collparent).find('div:not(.collapse,.panel-body), h4').attr('role','presentation')
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
 
             if(collpanel.hasClass('in')){
-              colltab.attr({ 'aria-controls': collpanel.attr('id'), 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
+              colltab.attr({ 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'0', 'aria-labelledby':collid, 'aria-hidden':'false' })
             }else{
-              colltab.attr({'aria-controls' : collpanel.attr('id'), 'tabindex':'-1' })
+              colltab.attr({ 'tabindex':'-1' })
               collpanel.attr({ 'role':'tabpanel', 'tabindex':'-1', 'aria-labelledby':collid, 'aria-hidden':'true' })
             }
           }
