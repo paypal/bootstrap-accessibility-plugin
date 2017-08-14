@@ -21,7 +21,10 @@
             collparent.attr({ 'role' : 'tablist', 'aria-multiselectable' : 'true' })
             collpanel.attr({ 'role':'tabpanel', 'aria-labelledby':collid })
 
-            if(collpanel.hasClass('in')){
+            if(!hasopenpanel && parentpanel.is(parentfirstchild)) {
+              colltab.attr({ 'tabindex':'0' })
+              collpanel.attr({ 'tabindex':'-1' })
+            }else if(collpanel.hasClass('in')){
               colltab.attr({ 'aria-selected':'true', 'aria-expanded':'true', 'tabindex':'0' })
               collpanel.attr({ 'tabindex':'0', 'aria-hidden':'false' })
             }else{
