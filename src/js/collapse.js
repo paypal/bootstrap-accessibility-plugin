@@ -11,6 +11,7 @@
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
         , parentpanel = collpanel.parent() // panel containing title and panel body
         , parentfirstchild = (collparent) ? collparent.find('.panel.panel-default:first-child') : null // first child of containing accordion
+        , hasopenpanel = collparent.find('.panel-collapse.in').length > 0 // true, if collapse parent has any panels with class 'in'; otherwise, false
 
           colltab.attr('id', collid)
 
