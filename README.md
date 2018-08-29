@@ -1,6 +1,6 @@
 <img src="images/logo/logo_347x50_PPa11y.png" alt="PayPal accessibility logo">
 
-# Bootstrap Accessibility Plugin, v1.0
+# Bootstrap Accessibility Plugin, v1.0.6
 ## by the PayPal Accessibility Team
 
 See the [Authors](#authors) section below for more information.
