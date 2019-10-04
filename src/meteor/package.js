@@ -1,6 +1,7 @@
 Package.describe({
   name: 'paypal:bootstrap-accessibility-plugin',
   summary: 'Accessibility Plugin for Bootstrap 3',
+  git: 'https://github.com/paypal/bootstrap-accessibility-plugin.git',
   version: '{{version}}'
 });
 
