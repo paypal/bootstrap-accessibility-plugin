@@ -640,7 +640,7 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
           , $active  = $element.find('[role=tabpanel].active')
           , $next    = next || $active[type]()
           , $tab
-          , $tab_count = $element.find('[role=tabpanel]').size()
+          , $tab_count = $element.find('[role=tabpanel]').length
           , $prev_side = $element.find('[data-slide="prev"]')
           , $next_side = $element.find('[data-slide="next"]')
           , $index      = 0
